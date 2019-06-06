@@ -3,7 +3,9 @@
 
 
 class Client extends ClientBase {
-	
+	enterLineItem(lineItem) {
+		base.enterLineItem(lineItem)
+	}
 }
 
 
@@ -16,7 +18,6 @@ try {
 	data := client.getOrderData(oid)
 
   client.enterOrderId("FM-" . oid)
-	client.enterShippingAddress(data)
 	client.enterLineItems(data)
 	client.enterCustomerReference(data)
 } catch ex {
