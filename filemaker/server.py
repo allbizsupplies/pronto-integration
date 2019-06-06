@@ -29,7 +29,7 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                     data['order'] = order
                 else:
                     data['error'] = "Order " + str(oid) + " not found."
-            except ValueError as ex:
+            except ValueError:
                 data['error'] = params['order'][0] + " is not a valid order number."
         else:
             data['error'] = "No order number given."
@@ -49,8 +49,8 @@ class FMClient:
         self.password = settings["fm_password"]
         self.table = settings["fm_table"]
         self.fields = settings['fields']
-        self.conn = self.get_connection()
 
+        self.conn = self.get_connection()
 
     def get_connection(self):
         conn = pyodbc.connect(
@@ -64,7 +64,6 @@ class FMClient:
         conn.setencoding("utf-8")
 
         return conn
-        
 
     def get_order(self, oid):
         order = None
@@ -125,10 +124,30 @@ class FMClient:
 
             if art > 0.00:
                 order['items'].append({
-                        'item_code': "ART",
+                        'item_code': "ALL-ART",
                         'quantity': "1",
                         'price': str(art),
                     })
+
+            # Get the payments
+            for field in self.fields['payments']:
+                amount = record[field['amount']]
+
+                if amount:
+                    price = float(amount)
+
+                    item = {
+                        'item_code': "ALL-DEPPRINT",
+                        'quantity': "-1",
+                        'price': str(price),
+                    }
+
+                    invoice = record[field['invoice']]
+
+                    if invoice:
+                        item['description'] = "Paid on invoice " + str(int(invoice))
+
+                    order['items'].append(item)
         else:
             error = "Order " + str(oid) + " not found."
 
@@ -137,7 +156,7 @@ class FMClient:
 
 
 # Get the FM settings
-with open("settings.yml") as stream:
+with open("settings.filemaker.yml") as stream:
     settings = yaml.load(stream)
 
 # Get the list of item codes
