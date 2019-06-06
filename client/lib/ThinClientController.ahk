@@ -5,7 +5,6 @@ AutoTrim, Off ; Allow values to begin/end with whitespace characters such as `t.
 
 #include LegacyAHK.ahk
 
-
 class ThinClientController {
 
 
@@ -42,7 +41,7 @@ class ThinClientController {
 		}
 
 		; Set focus on Pronto. 
-		WinActivate, %Title%
+		WinActivate, %title%
 	}
 
 

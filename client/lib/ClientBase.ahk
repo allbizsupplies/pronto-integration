@@ -1,19 +1,26 @@
 #include JSON.ahk
 #include ThinClientController.ahk
 
-
 ; Limit prices and quantities to 4 decimal points.
 SetFormat, Float, 0.4
 
 
-class ClientBase {
+global POS_READY := "Confirm Operator Password"
+global POS_READY_FOR_ITEM := "Enter Item Code [HELP], Hotkey or '.' for Options"
+global POS_READY_FOR_NOTE := "Press the ESC key to finish (or Save/Cancel)"
+global POS_READY_FOR_QUANTITY := ""
+global POS_READY_FOR_PRICE := "Enter the item price"
+global POS_SAVE_NOTE := "Save your changes"
+global POS_CORRECT := "Correct values on the screen"
+global POS_READY_FOR_ADDR_LINE := "Enter the delivery address/instr. line"
+global POS_READY_FOR_ADDR_POSTCODE := "Enter the postcode for this address"
+global POS_READY_FOR_ADDR_PHONE := "Enter the delivery Phone number"
+global POS_READY_FOR_ADDR_FAX := "Enter the delivery Fax number"
+global POS_READY_FOR_ADDR_DPID := "Enter the delivery point identifier"
+global POS_READY_FOR_ADDR_DATE := "Enter the estimated delivery date for this order"
 
-  POS_READY := "Confirm Operator Password"
-  POS_READY_FOR_ITEM := "Enter Item Code [HELP], Hotkey or '.' for Options"
-  POS_READY_FOR_NOTE := "Press the ESC key to finish (or Save/Cancel)"
-  POS_READY_FOR_QUANTITY := ""
-  POS_READY_FOR_PRICE := "Enter the item price"
-  POS_SAVE_NOTE := "Save your changes"
+
+class ClientBase {
 
 
   __new(settings_filepath) {
@@ -33,7 +40,93 @@ class ClientBase {
     if (host == "" || port == "")
       throw "Unable to get server settings."
 
-    this.url := "http://" . host . ":" . port . "/?order=" . oid
+    this.baseUrl := "http://" . host . ":" . port
+  }
+
+
+  enterOrderId(oid) {
+    this.pronto.sendOnStatus("DN{Enter}", POS_READY_FOR_ITEM)
+    this.pronto.sendRawOnStatus("Order ID: " . oid, POS_READY_FOR_NOTE)
+    this.pronto.sendOnStatus("{Esc}", POS_READY_FOR_NOTE)
+    this.pronto.sendOnStatus("S", POS_SAVE_NOTE)
+  }
+
+
+	enterLineItems(data) {
+    this.pronto.focusClient()
+
+		for index, lineItem in data.order.items
+		{
+			this.enterLineItem(lineItem)
+    }
+	}
+
+
+  enterShippingAddress(data) {    
+    if (data.order.address) {
+      address := data.order.address
+      
+      this.pronto.sendOnStatus("DA{Enter}", POS_READY_FOR_ITEM)
+      this.pronto.sendOnStatus("C", POS_CORRECT)
+
+      this.pronto.sendOnStatus(address.name, POS_READY_FOR_ADDR_LINE)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ADDR_LINE)
+
+      this.pronto.sendOnStatus(address.address_1, POS_READY_FOR_ADDR_LINE)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ADDR_LINE)
+
+      this.pronto.sendOnStatus(address.address_2, POS_READY_FOR_ADDR_LINE)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ADDR_LINE)
+
+      this.pronto.sendOnStatus(address.address_3, POS_READY_FOR_ADDR_LINE)
+      this.pronto.sendOnStatus("{Enter 4}", POS_READY_FOR_ADDR_LINE)
+
+      this.pronto.sendOnStatus(address.postcode, POS_READY_FOR_ADDR_POSTCODE)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ADDR_POSTCODE)
+
+      this.pronto.sendOnStatus(address.phone, POS_READY_FOR_ADDR_PHONE)
+      this.pronto.sendOnStatus("{F4}", POS_READY_FOR_ADDR_PHONE)
+    }
+  }
+
+
+  enterLineItem(lineItem) {
+    this.pronto.waitClientStatus(POS_READY_FOR_ITEM)
+
+    ; Enter the item code.
+    this.pronto.sendRawOnStatus(lineItem.item_code, POS_READY_FOR_ITEM)
+    this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ITEM)
+
+    ; Enter the item quantity.
+    if (lineItem.quantity) {
+      this.pronto.sendOnStatus("*{Enter}", POS_READY_FOR_ITEM)
+      this.pronto.sendRawOnStatus(lineItem.quantity, POS_READY_FOR_QUANTITY)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_QUANTITY)
+    }
+
+    ; Enter the item price.
+    if (lineItem.price) {
+      this.pronto.sendOnStatus("P{Enter}", POS_READY_FOR_ITEM)
+      this.pronto.sendRawOnStatus(lineItem.price, POS_READY_FOR_PRICE)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_PRICE)
+    }
+
+    ; Enter the description as a note.
+    if (StrLen(lineItem.description) > 0 || StrLen(lineItem.name) > 0) {
+      this.pronto.sendOnStatus("DN{Enter}", POS_READY_FOR_ITEM)
+
+      if (StrLen(lineItem.name) > 0) {
+        this.pronto.sendRawOnStatus("Name: " . lineItem.name, POS_READY_FOR_NOTE)
+        this.pronto.sendRawOnStatus("`n", POS_READY_FOR_NOTE)
+      }
+
+      if (StrLen(lineItem.description) > 0) {
+        this.pronto.sendRawOnStatus(lineItem.description, POS_READY_FOR_NOTE)
+      }
+
+      this.pronto.sendOnStatus("{Esc}", POS_READY_FOR_NOTE)
+      this.pronto.sendOnStatus("S", POS_SAVE_NOTE)
+    }
   }
 
 
@@ -42,9 +135,10 @@ class ClientBase {
     this.pronto.focusClient()
 
     Loop {
-      prontoStatus := pronto.getClientStatus()
+      prontoStatus := this.pronto.getClientStatus()
+
       if (prontoStatus == POS_READY_FOR_ITEM)
-        break
+        return
       else if (A_Index > 8) {
         throw "You need to have a sale open in POS and ready to enter items."
       }
@@ -72,11 +166,19 @@ class ClientBase {
   }
 
 
-  getOrderData() {
+  getOrderData(oid) {
     ; Query the server for the order data.
     httpRequest := ComObjCreate("WinHttp.Winhttprequest.5.1")
-    httpRequest.open("GET", this.url)
+    httpRequest.open("GET", this.baseUrl . "/?order=" . oid)
     httpRequest.send()
+
     data := JSON.decode(httpRequest.responseText)
+
+    if (data.error) {
+      MsgBox % "Error: " . data.error
+      ExitApp
+    }
+
+    return data
   }
 }

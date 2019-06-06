@@ -1,0 +1,2591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="utf-8">
+	<title>Admin :: View/Update Order</title>
+
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="shortcut icon" href="https://shop.allbizsupplies.biz/images/websitelogos/128/retailer_favicon_logo498.png">
+
+	<link href="response_files/admin_style.css" rel="stylesheet">
+	<link href="response_files/admin_tps_common.css" rel="stylesheet">
+	<!--[if lte IE 9]>
+		<link rel="stylesheet" href="https://shop.allbizsupplies.biz/thirdparty/ace-admin/css/ace-part2.css" />
+	<![endif]-->
+
+	<!--[if lte IE 9]>
+	  <link rel="stylesheet" href="https://shop.allbizsupplies.biz/thirdparty/ace-admin/css/ace-ie.css" />
+	<![endif]-->
+
+	<!-- ace settings handler -->
+	<script async="" charset="utf-8" src="response_files/a.js" type="text/javascript"></script>
+	<script src="response_files/ace-extra.js"></script>
+
+	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+	<!--[if lte IE 8]>
+	<script src="https://shop.allbizsupplies.biz/thirdparty/js/html5shiv.js"></script>
+	<script src="https://shop.allbizsupplies.biz/thirdparty/js/respond.min.js"></script>
+	<![endif]-->
+	<style>
+		.cke {
+			visibility: hidden;
+		}
+	</style>
+	<style media="print" class="jx_ui_StyleSheet" __jx__id="___$_2" type="text/css">
+		.zopim {
+			display: none !important
+		}
+	</style>
+	<script src="response_files/prompt.js"></script>
+	<style id="style-1-cropbar-clipper">
+		/* Copyright 2014 Evernote Corporation. All rights reserved. */
+		.en-markup-crop-options {
+			top: 18px !important;
+			left: 50% !important;
+			margin-left: -100px !important;
+			width: 200px !important;
+			border: 2px rgba(255, 255, 255, .38) solid !important;
+			border-radius: 4px !important;
+		}
+
+		.en-markup-crop-options div div:first-of-type {
+			margin-left: 0px !important;
+		}
+	</style>
+</head>
+
+<body class="no-skin">
+	<div class="zopim" __jx__id="___$_21 ___$_21"
+		style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; padding: 0px; border: 0px none; background: transparent none repeat scroll 0% 0%; overflow: hidden; position: fixed; z-index: 16000002; width: 190px; height: 104px; right: 10px; bottom: 0px;"
+		data-test-id="ChatWidgetButton"><iframe
+			style="background-color: transparent; vertical-align: text-bottom; position: relative; width: 100%; height: 100%; min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%; margin: 0px; overflow: hidden; display: block;"
+			src="about:blank" data-test-id="ChatWidgetButton-iframe" title="Zendesk Chat widget button"
+			frameborder="0"></iframe></div>
+	<div class="zopim" __jx__id="___$_4 ___$_4"
+		style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; padding: 0px; border: 0px none; background: transparent none repeat scroll 0% 0%; overflow: hidden; position: fixed; z-index: 16000001; right: 10px; bottom: 0px; border-top-left-radius: 5px; border-top-right-radius: 5px; display: none; width: 240px; height: 200px; box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px 2px;"
+		data-test-id="ChatWidgetWindow"><iframe
+			style="background-color: transparent; vertical-align: text-bottom; position: relative; width: 100%; height: 100%; min-width: 100%; min-height: 100%; max-width: 100%; max-height: 100%; margin: 0px; overflow: hidden; display: block;"
+			src="about:blank" data-test-id="ChatWidgetWindow-iframe" title="Zendesk Chat widget window"
+			frameborder="0"></iframe></div>
+
+	<!-- #section:basics/navbar.layout -->
+	<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top">
+		<noscript>
+			<div class="alert alert-danger text-center">Currently JavaScript is disabled in your browser, Administrator panel
+				does not work properly. Check it out <a href="http://www.activatejavascript.org/" target="_blank">how to enable
+					JavaScript</a> in various browsers.</div>
+		</noscript>
+		<div class="navbar-container" id="navbar-container">
+			<!-- #section:basics/sidebar.mobile.toggle -->
+			<button type="button" class="navbar-toggle menu-toggler pull-left hidden-md" id="menu-toggler"
+				data-target="#sidebar">
+				<span class="sr-only">Toogle Sidebar</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<!-- /section:basics/sidebar.mobile.toggle -->
+			<div class="navbar-header pull-left">
+				<!-- #section:basics/navbar.layout.brand -->
+				<a href="https://shop.allbizsupplies.biz/admin/welcome.php" class="navbar-brand">
+					<small>
+						<i class="fa fa-home"></i>
+						allbiz </small>
+				</a>
+				<i class="hidden-sm hidden-md hidden-lg fa fa-spinner fa-spin bigger-150 ajax_loader mt12 orange2"
+					style="display:none;"></i>
+				<!-- #section:basics/navbar.toggle -->
+				<button class="visible-xs visible-sm pull-right navbar-toggle collapsed" type="button" data-toggle="collapse"
+					data-target=".navbar-buttons">
+					<span class="sr-only">Toogle User Menu</span>
+					<i class="fa fa-user fa-2x"></i>
+				</button>
+				<button class="visible-xs visible-sm pull-right navbar-toggle collapsed pinDataMobile" type="button"
+					data-toggle="collapse" data-target=".pin_area">
+					<span class="sr-only">Toogle Pin-Unpin Menu</span>
+					<i class="fa fa-bookmark fa-2x"></i>
+				</button>
+				<!-- /section:basics/navbar.toggle -->
+			</div>
+
+			<div class="col-xs-12 col-sm-7 col-md-5 navbar-pin all_data pull-left hidden-xs hidden-sm">
+				<div class="pined-data"></div>
+			</div>
+			<!-- #section:basics/navbar.dropdown -->
+			<div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="red label-danger">
+						<label class="pull-right inline ">
+							<label href="javascript:void();" style="color:white;padding-left: 5px;">Cache</label>
+							<input id="togglecache" name="togglecache" checked="checked" class="ace ace-switch ace-switch-5"
+								type="checkbox">
+							<span class="lbl middle"><a href="javascript:void;" style="color:white;padding: 0px 5px 0px 5px;"
+									title="Clear Website Cache" class="clearcache" id="clearcache" onclick="clear_website_cache()"> <i
+										class="fa fa-2x fa-trash"></i> </a></span>
+						</label>
+					</li>
+					<li class="opennavbar light-blue"><a href="#" class="dropdown-toggle" style="min-width:0px;"><i
+								class="fa fa-chevron-down"></i></a>
+
+						<ul style="list-style:none;display:none;margin-left:0px;margin-right: -38px;margin-left:0px;"
+							class="tgul customnav">
+							<li class="transparent btn-purple ">
+								<a href="https://shop.allbizsupplies.biz/admin/htmlhelp.php" data-placement="right"
+									data-toggle="tooltip" data-original-title="Click to view html help for front store content setup"
+									target="_blank" class="btn-lg"><i class="fa fa-file-code-o"></i> <i class="fa fa-question"></i></a>
+							</li>
+							<li class="transparent btn-warning hidden-xs hidden-sm">
+								<a href="javascript:void();" onclick="launchFullscreen(document.documentElement);"
+									data-placement="right" data-toggle="tooltip" data-original-title="Click to full screen window"
+									style="text-decoration:none;"><i class="glyphicon glyphicon-fullscreen btn-sm"></i></a>
+							</li>
+						</ul>
+					</li>
+					<li class="light-blue">
+						<a href="https://shop.allbizsupplies.biz/" data-placement="bottom" data-toggle="tooltip"
+							data-original-title="Front Store" target="_blank" class=""><i class="fa fa-desktop fa-2x"></i></a>
+					</li>
+
+					<li class="transparent hidden-xs opclso" id="lchat">
+					</li>
+					<li class="purple notify_admin">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<i class="ace-icon fa fa-bell "></i>
+							<span class="badge badge-important tot_cnt">0 </span>
+						</a>
+						<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header">
+								<i class="ace-icon fa fa-exclamation-triangle"></i>
+								<span class="tot_cnt">0</span>&nbsp;<span>Notifications</span>
+							</li>
+
+							<li class="dropdown-content ace-scroll" style="position: relative;">
+								<div class="scroll-track" style="display: none;">
+									<div class="scroll-bar"></div>
+								</div>
+								<div class="scroll-content" style="max-height: 200px;">
+									<ul class="dropdown-menu dropdown-navbar navbar-pink">
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/order_listing.php?lsd=OA" data-cnt="0" id="OA">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-pink"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">N</span>
+														New Orders
+													</span>
+													<span class="pull-right badge badge-pink cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/order_listing.php?lsd=OU" data-cnt="0" id="OU">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-success"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">U</span>
+														Updated Orders
+													</span>
+													<span class="pull-right badge badge-success cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/order_pending_listing.php?lsd=UP" data-cnt="0"
+												id="UP">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-pink"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">UP</span>
+														Unpaid Orders
+													</span>
+													<span class="pull-right badge badge-pink cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/quote_listing.php?lsd=QA" data-cnt="0" id="QA">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-info"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">N</span>
+														New Quote
+													</span>
+													<span class="pull-right badge badge-info cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/quote_listing.php?lsd=QU" data-cnt="0" id="QU">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-warning"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">U</span>
+														Updated Quote
+													</span>
+													<span class="pull-right badge badge-warning cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/user_listing.php?lsd=CA" data-cnt="0" id="CA">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-inverse"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">C</span>
+														New Customer
+													</span>
+													<span class="pull-right badge badge-inverse cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/order_payment_request.php?lsd=PR&amp;paid=Paid"
+												data-cnt="0" id="PR">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-inverse"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">P</span>
+														Paid Request
+													</span>
+													<span class="pull-right badge badge-inverse cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/solution_support.php?lsd=CO&amp;ptype=1"
+												data-cnt="0" id="CO">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-info"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">P</span>
+														Contactus Request
+													</span>
+													<span class="pull-right badge badge-info cnt">0</span>
+												</div>
+											</a>
+										</li>
+										<li class="hide">
+											<a href="https://shop.allbizsupplies.biz/admin/order_listing.php?lsd=CR" data-cnt="0" id="CR">
+												<div class="clearfix">
+													<span class="pull-left">
+														<span class="btn btn-md no-hover btn-inverse"
+															style="padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;">C</span>
+														Cancellation Request
+													</span>
+													<span class="pull-right badge badge-inverse cnt">0</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="dropdown-footer footupnoti show">
+								<p class="center">No Notifications Available</p>
+							</li>
+							<li class="divider windownotify"></li>
+							<li class="dropdown-footer">
+								<p class="center"><input type="checkbox" class=" ace" value="1" id="windownotify"
+										name="windownotify"><span class="lbl">Desktop Notification</span></p>
+							</li>
+						</ul>
+					</li>
+					<!-- #section:basics/navbar.user_menu -->
+					<li class="light-blue">
+						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+							<i class="fa fa-user fa-2x"> </i>
+							<span class="user-info">
+								<small>Welcome, </small> btreloar [allBIZ Supplies] </span>
+
+							<i class="ace-icon fa fa-caret-down"></i>
+						</a>
+						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-caret dropdown-close">
+							<li>
+								<a href="https://shop.allbizsupplies.biz/admin/admin_favourite_link.php">
+									<i class="ace-icon fa fa-star"></i>
+									Setup Favorite Links </a>
+							</li>
+							<li>
+								<a href="https://shop.allbizsupplies.biz/admin/changepassword.php">
+									<i class="ace-icon fa fa-user"></i>
+									Change Password </a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="https://shop.allbizsupplies.biz/admin/welcome.php?Action=Logout">
+									<i class="ace-icon fa fa-power-off"></i>
+									Logout </a>
+							</li>
+						</ul>
+					</li>
+					<!-- /section:basics/navbar.user_menu -->
+				</ul>
+			</div>
+			<!-- Start #right-sidebar -->
+			<div id="right-sidebar" class="hide-sidebar visible-xs visible-sm">
+				<div class="sidebar-header">
+					<ul class="nav nav-list">
+						<li class="mobilePinIcon text-center">
+							<span class="pin-icon pin-pages pin-text" mobile="1" data_label="0">Pin this page</span><i
+								class="fa fa-thumb-tack  pin-icon pin-pages" data_label="0" mobile="1" data-toggle="tooltip"
+								data-placement="left" title="Pin this page"></i> </li>
+					</ul>
+				</div>
+				<!-- Start .sidebar-inner -->
+				<div class="sidebar-inner">
+					<div class="panel-body p6">
+						<ul class="pin-area list-unstyled spaced ">
+						</ul>
+					</div>
+				</div>
+				<!-- End .sidebar-inner -->
+			</div>
+		</div><!-- /.navbar-container -->
+	</div>
+	<!-- /section:basics/navbar.layout -->
+	<script>
+		var CONFIRM_CACHE_CLEAR = 'Are you sure want to clear website cache?';
+	</script>
+	<div class="main-container" id="main-container" style="padding-top: 45px;">
+
+		<!-- #section:basics/sidebar -->
+		<div id="sidebar" class="sidebar responsive sidebar-fixed sidebar-scroll" data-sidebar="true"
+			data-sidebar-scroll="true" data-sidebar-hover="true">
+			<!-- /.sidebar-shortcuts -->
+			<!-- #section:basics/content.searchbox -->
+			<div class="nav-search" id="nav-search">
+				<span class="input-icon">
+					<input type="text" placeholder="Search" class="nav-search-input" id="nav-search-input" autocomplete="off">
+					<i class="ace-icon fa fa-search nav-search-icon"></i>
+				</span>
+			</div><!-- /.nav-search -->
+			<!-- /section:basics/content.searchbox -->
+			<div class="nav-wrap-up pos-rel">
+				<div class="nav-wrap" style="max-height: 653px;">
+					<div style="position: relative; top: 0px; transition-property: top; transition-duration: 0.15s;">
+						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+								<a class="btn btn-success " data-toggle="tooltip" data-placement="top" title="List Orders"
+									href="https://shop.allbizsupplies.biz/admin/order_listing.php">
+									<i class="ace-icon fa fa-shopping-cart"></i>
+								</a>
+								<a class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Website Customers"
+									href="https://shop.allbizsupplies.biz/admin/user_listing.php">
+									<i class="ace-icon fa fa-user"></i>
+								</a>
+								<a class="btn btn-info " data-toggle="tooltip" data-placement="top" title="Products"
+									href="https://shop.allbizsupplies.biz/admin/product_listing.php">
+									<i class="ace-icon fa fa-tags"></i>
+								</a>
+								<a class="btn btn-warning " data-toggle="tooltip" data-placement="top" title="Product Templates"
+									href="https://shop.allbizsupplies.biz/admin/template_manager.php">
+									<i class="ace-icon fa fa-file-pdf-o"></i>
+								</a>
+								<a class="btn btn-danger " data-toggle="tooltip" data-placement="top" title="Store Management"
+									href="https://shop.allbizsupplies.biz/admin/store_listing.php">
+									<i class="ace-icon fa fa-tags"></i>
+								</a>
+							</div>
+							<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+								<span class="btn btn-success"></span>
+								<span class="btn btn-info"></span>
+								<span class="btn btn-warning"></span>
+								<span class="btn btn-danger"></span>
+							</div>
+						</div>
+						<ul class="nav nav-list">
+							<li>
+								<a href="https://shop.allbizsupplies.biz/admin/welcome.php">
+									<i class="menu-icon fa fa-tachometer"></i>
+									<span class="menu-text">Dashboard</span>
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li class="open">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-shopping-cart"></i>
+									<span class="menu-text">
+										Orders </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li class="open active">
+										<a href="https://shop.allbizsupplies.biz/admin/order_listing.php"
+											class="p0 menusubtoggle dropdown-toggle"><i class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/order_listing.php">List Orders</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/order_listing.php">List Orders</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/order_payment_request.php">Payment Request</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/create_order_user.php">Add New Order</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/process_status_listing.php">Order Status</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/coupon_listing.php">Coupons / Discount</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/order_pending_listing.php">Unpaid Orders</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/order_archive_listing.php">Archive Orders</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/staff_listing.php">Staff Management</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-comment"></i>
+									<span class="menu-text">
+										Quote Management </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/quote_listing.php">View Quotes</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-user"></i>
+									<span class="menu-text">
+										Customer </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/user_listing.php">Website Customers</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/subscriber_listing.php">Newsletter Subscribers</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/user_designs.php">Customer Templates</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-group"></i>
+									<span class="menu-text">
+										Corporate Management </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/corporate_listing.php">Corporates</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/corporate_department_listing.php">Departments</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/corporate_inventory_configuration.php">Inventory</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-tags"></i>
+									<span class="menu-text">
+										Products </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_listing.php">Products</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_category_listing.php">Product Categories</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_weight.php">Product Weight/Days</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_markup_import.php">Product Markup Import</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_tax_setting.php">Products Tax/VAT
+											Settings</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_price_all.php"
+											class="p0 menusubtoggle dropdown-toggle"><i class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/product_price_all.php">Product Price</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/product_price_all.php">Product Price</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/product_price_bulk_update.php">Product Price -
+													Bulk</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/product_price_bulk_option_update.php">Product
+													Option Price - Bulk</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/modify_products_price.php">Product Price -
+													Excel</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-cogs"></i>
+									<span class="menu-text">
+										Store Management </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/store_listing.php">Store Management</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/store_top_banner_configuration.php">Banner
+											Settings</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/store_theme_settings.php">Theme Settings</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/store_configuration_main.php">Configuration
+											Settings</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/payon_account_listing.php">Payon Account Type</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-file-pdf-o"></i>
+									<span class="menu-text">
+										Templates </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/template_manager.php"
+											class="p0 menusubtoggle dropdown-toggle"><i class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/template_manager.php">Product Templates</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/template_manager.php">Product Templates</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/template_manager.php?tmtype=1">PDF Block
+													Templates</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/template_properties_master.php">Template Properties
+											Master</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/template_category_listing.php">Template
+											Categories</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/template_manager_duplicate.php">Duplicate
+											Templates</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-file-text-o"></i>
+									<span class="menu-text">
+										Content Management </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/cms_listing.php">Contents</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/faq_category_listing.php">FAQ Categories</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/faq_listing.php">FAQs</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/testimonial_listing.php">Testimonials</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/top_banner_listing.php">Banners</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/emailtemplate_listing.php"
+											class="p0 menusubtoggle dropdown-toggle"><i class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/emailtemplate_listing.php">Email/SMS
+											Notifications</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/emailtemplate_listing.php">Email
+													Notifications</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/sms_notification_listing.php">SMS
+													Notifications</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-globe"></i>
+									<span class="menu-text">
+										SEO </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/seo_all.php">Page title, Keyword setting</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/sitemap_xml.php">Sitemaps</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/metatag.php">Metatags Settings</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/url_redirection_listing.php">Manage URL
+											Redirection</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-gear"></i>
+									<span class="menu-text">
+										Store Personalization </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/product_info_layout_listing.php">Product Page
+											Layout</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/menulink_listing.php">Links - Header / Footer</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/sidebar_management.php"
+											class="p0 menusubtoggle dropdown-toggle"><i class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/sidebar_management.php">Sidebar Management</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/sidebar_management.php">Sidebar Management</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/sidebar_widget.php">Sidebar Widget</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-crosshairs"></i>
+									<span class="menu-text">
+										Business Partners </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/printer_listing.php">Printer</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/sales_agent_listing.php">Sales Agent</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-cogs"></i>
+									<span class="menu-text">
+										Store Configuration </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/configuration_shipping_listing.php">Shipping
+											Method</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/configuration_external_service_listing.php">External
+											Service Settings</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-picture-o"></i>
+									<span class="menu-text">
+										Designer Studio </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/designer_image_gallery_listing.php">Images</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/designer_imagecategory_listing.php">Image
+											Categories</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-bar-chart-o"></i>
+									<span class="menu-text">
+										Reports </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="p0 menusubtoggle dropdown-toggle"><i
+												class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="dropdown-toggle">Sales</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_sales_order_summary.php">Order
+													Summary</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_sales_orderdetails.php">Order Detail</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_payment_request.php">Payment Request
+													Report</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_shipping_summary.php">Shipping
+													Summary</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_tax_summary.php">Tax Summary</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_coupon_summary.php">Coupon Summary</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_production_day_summary.php">Order
+													Delivery Report</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="p0 menusubtoggle dropdown-toggle"><i
+												class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="dropdown-toggle">Product</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_products_sales.php">Product Sales</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_templates_sales.php">Template Sales</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_inventory_request.php">Inventory Request
+													Report</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_inventory.php">Inventory Report</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_store_product_sync_price.php">Store
+													Product Sync Price</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="p0 menusubtoggle dropdown-toggle"><i
+												class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="dropdown-toggle">Customers</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_customer_order_summary.php">Customer
+													Order Summary</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_payon_account.php">Payon Account</a>
+											</li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_customer_details.php">Customer
+													Details</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="p0 menusubtoggle dropdown-toggle"><i
+												class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="dropdown-toggle">Partners</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_sales_agent_commission.php">Sales Agent
+													Commission</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_printer_order_summary.php">Printer Order
+													Summary</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_printer_commission.php">Commission</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="p0 menusubtoggle dropdown-toggle"><i
+												class="arrow fa fa-angle-down"></i></a>
+										<a href="https://shop.allbizsupplies.biz/admin/" class="dropdown-toggle">Log</a>
+
+
+										<ul class="submenu">
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_audit_log.php">Audit Log</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_email_log.php">Mail Log</a></li>
+											<li><a href="https://shop.allbizsupplies.biz/admin/report_sms_log.php">SMS Log</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-user-secret"></i>
+									<span class="menu-text">
+										Admin </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/admin_listing.php">Admin</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/admin_group.php">Admin Group / Role</a>
+
+
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-envelope"></i>
+									<span class="menu-text">
+										Support </span>
+									<i class="arrow fa fa-angle-down"></i>
+								</a>
+								<ul class="submenu">
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/solution_support.php">Admin Support</a>
+
+
+									</li>
+									<li>
+										<a href="https://shop.allbizsupplies.biz/admin/solution_support.php?ptype=1">User Support</a>
+
+
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="ace-scroll nav-scroll">
+					<div class="scroll-track scroll-active" style="display: block; height: 653px;">
+						<div class="scroll-bar"
+							style="height: 455px; top: 0px; transition-property: top; transition-duration: 0.1s;"></div>
+					</div>
+					<div class="scroll-content" style="max-height: 653px;">
+						<div style="height: 938px; width: 8px;"></div>
+					</div>
+				</div>
+			</div> <!-- #section:basics/sidebar.layout.minimize -->
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" style="z-index: 1;">
+				<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+					data-icon2="ace-icon fa fa-angle-double-right"></i>
+			</div>
+
+			<!-- /section:basics/sidebar.layout.minimize -->
+			<script type="text/javascript">
+				try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+			</script>
+		</div>
+		<!-- /section:basics/sidebar -->
+		<div class="main-content">
+			<div class="main-content-inner">
+
+				<!-- #section:basics/content.breadcrumbs -->
+				<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+					<ul class="breadcrumb hidden-xs">
+						<!--<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="index.php">Home</a>
+		</li>
+		<li class="active">
+			Dashboard
+		</li>-->
+						<li><i class="fa fa-home home-icon"></i> <a
+								href="https://shop.allbizsupplies.biz/admin/welcome.php">Home</a> </li>
+						<li><a href="https://shop.allbizsupplies.biz/admin/order_listing.php">List Orders</a> </li>
+						<li class="active">View/Update Order </li>
+					</ul><!-- /.breadcrumb -->
+					<i class="fa fa-spinner fa-spin bigger-150 ajax_loader" style="display:none;"></i>
+					<!-- TPS CODE FOR STORE SEARCH FILTER [START] -->
+					<span class="header_pin_icon_data header_filter mr12">
+						<form method="POST" class="form-inline pull-left btn-xs mr12">
+						</form>
+					</span>
+					<!-- TPS CODE FOR STORE SEARCH FILTER [END] -->
+					<span class="pin_icon_data hidden-xs hidden-sm" id="pin_icon">
+						<i class="fa fa-thumb-tack  pin-icon pin-pages" data_label="0" mobile="0" data-toggle="tooltip"
+							data-placement="left" title="Pin this page"></i> </span>
+					<span class=" pin_icon_data pull-right  mr12">
+					</span>
+
+				</div>
+				<style type="text/css">
+					.header_pin_icon_data {
+						position: fixed;
+
+					}
+				</style>
+				<!-- /section:basics/content.breadcrumbs -->
+				<div class="page-content" style="padding-top: 49px;">
+
+					<div class="row" id="order_action_content">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<div class="page-header">
+								<h1>View/Update Order<small>59407</small></h1>
+								<div class="action_area block pull-right">
+									<span class="block_white align-top long_help"><a href="javascript:;"
+											class=" cursor-pointer fancybox-help" title="Help"><i
+												class="btn ace-icon fa fa-info-circle bigger-120 btn-app btn-default"></i></a>
+										<div class="helpcontenthtml" style="display:none;word-wrap: break-word;"><img class="img-responsive"
+												alt="" src="response_files/order_flow.png"></div>
+									</span> <a href="#" class="btn_ordproduct_history" data-oid="59407" data-statusid="219"
+										data-placement="top" data-toggle="tooltip" data-original-title="Order History"><i
+											class="fa fa-history btn-app btn-grey  btn ace-icon bigger-120"></i></a> </div>
+							</div>
+							<div class="row">
+
+								<div class="col-xs-12">
+									<div class="row">
+										<div class="col-sm-9 col-lg-3">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name">Order : </div>
+													<div class="profile-info-value">04 Jun, 2019 <span
+															class="label label-pink arrowed arrowed-right">Artwork Rejected</span> </div>
+												</div>
+												<div class="profile-info-row">
+													<div class="profile-info-name">Due Date : </div>
+													<div class="profile-info-value"><span>10 Jun, 2019&nbsp;<span
+																class="label label-success arrowed arrowed-right cursor-pointer pl6">Paid</span></span>
+													</div>
+												</div>
+												<div class="profile-info-row">
+													<div class="profile-info-name">Vendor / Printer : </div>
+													<div class="profile-info-value"><span><span class="red">No</span></span></div>
+												</div>
+												<div class="profile-info-row">
+													<div class="profile-info-name">Customer Details : </div>
+													<div class="profile-info-value"><span><a data-container="body" class="popover-ajaxinfo"
+																data-placement="top" data-easein="fadeInDown" data-id="user-35021"
+																href="https://shop.allbizsupplies.biz/admin/user_view_details.php?userid=35021&amp;corporateid=0"
+																data-original-title="Yasmine Smith">Yasmine Smith</a></span></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-9 col-lg-5">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name">Authority to leave a parcel for Unattended Delivery : </div>
+													<div class="profile-info-value">
+														YES </div>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-sm-3">
+											<a href="https://shop.allbizsupplies.biz/admin/order_action.php?Action=edit_order&amp;OrderId=59407&amp;update_ajax=yes"
+												class="btn btn-info btn-sm btn_ord_update_action"><i class="fa fa-pencil bigger-115 pr10"></i>
+												Update Order</a>
+											<div class="mt6"><a class="btn btn btn-light btn-sm"
+													href="https://shop.allbizsupplies.biz/admin/order_action.php?Action=send_attachment&amp;OrderId=59407"><i
+														class="fa fa-envelope-o bigger-115 pr10"></i> Send Invoice</a></div>
+											<div class="mt6"><a
+													href="https://shop.allbizsupplies.biz/admin/order_action.php?Action=edit_order&amp;OrderId=59407&amp;update_ajax=yes&amp;refund_order=yes"
+													class="btn btn-sm btn_ord_update_action btn-grey"><i
+														class="fa fa-mail-reply bigger-115 pr10"></i> Refund</a></div>
+										</div>
+
+									</div>
+									<div class="space"></div>
+									<ul class="nav nav-tabs" id="orderscontent">
+										<li class="active"><a href="#TabContent_orderdetail" id="tab_orderdetail" data-toggle="tab"
+												aria-expanded="true">View Orders</a></li>
+										<li class=""><a href="#TabContent_updateorderproduct" id="tab_updateorderproduct" data-toggle="tab"
+												aria-expanded="true">Update Order Product</a></li>
+										<li class=""><a href="#TabContent_createshipment" id="tab_createshipment" data-toggle="tab"
+												aria-expanded="true">Order Shipments</a></li>
+										<li class=""><a href="#TabContent_createnotes" id="tab_createnotes" data-toggle="tab"
+												aria-expanded="true">Order Notes</a></li>
+										<li class="pull-right">
+											<div class="btn-group col-btn-actions">
+												<button class="btn btn-white btn-inverse dropdown-toggle btn-sm" data-toggle="dropdown"
+													aria-expanded="false">
+													Action <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-right">
+													<li><a href="https://shop.allbizsupplies.biz/admin/order_printer_assign_job.php?oid=59407"><i
+																class="fa fa-check-square-o icon-on-left"></i> Assign Job to Printer</a></li>
+													<li><a
+															href="https://shop.allbizsupplies.biz/admin/order_modify.php?action=change_price&amp;oid=59407&amp;reftype=action"><i
+																class="fa fa-pencil-square-o icon-on-left"></i> Modify Order</a></li>
+													<li><a href="https://shop.allbizsupplies.biz/admin/order_print.php?oid=59407"
+															class="act_dwn_invoice"><i class="fa fa-download icon-on-left"></i> Download Invoice</a>
+													</li>
+													<li><a
+															href="https://shop.allbizsupplies.biz/admin/order_listing.php?action=downloadorder&amp;_type=1&amp;OrderId=59407"
+															class="act_ord_menu_link"><i class="fa fa-download icon-on-left"></i> Download File</a>
+													</li>
+													<li><a
+															href="https://shop.allbizsupplies.biz/admin/order_print_job_ticket.php?jobticket=true&amp;OrderId=59407"
+															class="act_ord_menu_link"><i class="fa fa-download icon-on-left"></i> Download Job
+															Ticket</a></li>
+													<li><a
+															href="https://shop.allbizsupplies.biz/admin/order_listing.php?action=archive_order&amp;_type=1&amp;oid=59407"
+															class="act_ord_archive"><i class="fa fa-archive icon-on-left"></i> Archive</a></li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<!-- Start :: Order Details -->
+										<div class="tab-pane fade  active in" id="TabContent_orderdetail">
+											<div class="dataTables_wrapper">
+												<div class="table-responsive">
+													<table class="table table-striped table-bordered table-hover">
+														<colgroup>
+															<col class="col-md-3">
+															<col class="col-md-3">
+															<col class="col-md-3">
+															<col class="col-md-3">
+														</colgroup>
+														<thead>
+															<tr>
+																<th>Customer Details</th>
+																<th>Shipping Address</th>
+
+																<th>Billing Address</th>
+																<th>Payment &amp; Shipping</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<address><strong>Yasmine Smith</strong> <br>yasmine.smith@pahs.com.au,<br>4/378 Main
+																		South Road,<br>MORPHETT VALE, MORPHETT VALE, <br>South Australia, <br>
+																		5162<br>Australia<br><span class="control-label"><label>Phone Number :
+																			</label></span><label class="control-label">&nbsp;83222792</label><br><span
+																			class="control-label"><label>Company Name : </label></span><label
+																			class="control-label">Pearson Allied Health Services</label><br></address>
+																</td>
+
+																<td>
+																	<address><strong>Yasmine Smith</strong> <br>yasmine.smith@pahs.com.au,<br>4/378 Main
+																		South Road,<br>MORPHETT VALE, MORPHETT VALE, <br>South Australia, <br>
+																		5162<br>Australia<br><span class="control-label"><label>Phone Number :
+																			</label></span><label class="control-label">&nbsp;83222792</label><br><span
+																			class="control-label"><label>Company Name : </label></span><label
+																			class="control-label">Pearson Allied Health Services</label><br></address>
+																</td>
+
+																<td>
+																	<address><strong>Yasmine Smith</strong> <br>yasmine.smith@pahs.com.au,<br>4/378 Main
+																		South Road,<br>MORPHETT VALE, MORPHETT VALE, <br>South Australia, <br>
+																		5162<br>Australia<br><span class="control-label"><label>Phone Number :
+																			</label></span><label class="control-label">&nbsp;83222792</label><br><span
+																			class="control-label"><label>Company Name : </label></span><label
+																			class="control-label">Pearson Allied Health Services</label><br></address>
+																</td>
+																<td>
+																	<dl class="dl-horizontal">
+																		<dt><b>Payment Method : </b></dt>
+																		<dd class="word-break">ANZ eGate</dd>
+																		<dt><b>Payment Date : </b></dt>
+																		<dd>04 Jun, 2019 12:37</dd>
+																		<dt><b>Transaction ID : </b></dt>
+																		<dd class="word-break">2090009226</dd>
+																		<dt><b>Shipping Company Name: </b></dt>
+																		<dd class="word-break">-----------</dd>
+																		<dt><b>Shipping method : </b></dt>
+																		<dd class="word-break">Weight Based</dd>
+																		<dt><b>Shipping Type : </b></dt>
+																		<dd class="word-break">Standard Shipping - Courier (For security, Unattended
+																			Deliveries at driver discretion)</dd>
+																		<dt><b>Tracking Number : </b></dt>
+																		<dd class="word-break">-----------</dd>
+																		<dt><b>Estimated Delivery Date : </b></dt>
+																		<dd class="word-break">10 Jun, 2019</dd>
+																	</dl>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-sm-12 col-lg-6 mb10 col-xs-12">
+													<div class="dataTables_wrapper">
+														<div class="row pb6">
+															<div class="col-xs-8 pl0 pt6">
+																<h4 class="smaller blue no-margin text-left">Order Product Details</h4>
+															</div>
+														</div>
+														<div class="table-responsive ord_prd_list_table">
+															<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+																id="ShowHiredesigner96544" class="fancybox-modal-content">
+																<form name="hire_designer" id="hire_designer_form" method="POST" action=""
+																	data-language="1" rel="opsform" novalidate="novalidate"></form>
+																<div class="modal-dialog modal-md" style="width:500px;">
+																	<div id="modal_detail" class="modal-content no-border">
+																		<div class="modal-header">
+																			<h4 class="modal-title blue bigger-150">Graphic Design Brief<small> ( Pearson
+																					Allied Health Services - Business cards x 2 types. CMYK: 77, 97, 0, 0 and
+																					CMYK: 76, 4, 100, 0 )</small></h4>
+																		</div>
+																		<div class="modal-body">
+																			<div class="widget-main ">
+																				<div class="form-horizontal">
+																				</div>
+																			</div>
+																			<div class="widget-footer">
+																				<div class=" text-right">
+																					<button class="btn btn-link"
+																						onclick="parent.jQuery.fancybox.getInstance().close();">Close</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+															<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+																id="ShowTemplatefiels96544" class="fancybox-modal-content">
+																<form name="hire_designer" id="template_field_form" method="POST" action=""
+																	data-language="1" rel="opsform" novalidate="novalidate"></form>
+																<div class="modal-dialog modal-md" style="width:500px;">
+																	<div id="modal_detail" class="modal-content no-border">
+																		<div class="modal-header">
+																			<h4 class="modal-title blue bigger-150">Template<small> ( Pearson Allied Health
+																					Services - Business cards x 2 types. CMYK: 77, 97, 0, 0 and CMYK: 76, 4, 100,
+																					0 )</small></h4>
+																		</div>
+																		<div class="modal-body">
+																			<div class="widget-main ">
+																				<div class="form-horizontal">
+																				</div>
+																			</div>
+																			<div class="widget-footer">
+																				<div class=" text-right">
+																					<button class="btn btn-link"
+																						onclick="parent.jQuery.fancybox.getInstance().close();">Close</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+															<table class="dataTable table table-striped table-bordered ord_product_list">
+																<colgroup>
+																	<col class="col-md-1">
+																	<col class="col-md-4">
+																	<col>
+																	<col class="col-md-1">
+																	<col class="col-md-2">
+																</colgroup>
+
+																<thead>
+																	<tr>
+																		<th class="text-center">ID</th>
+																		<th>Product Image</th>
+																		<th>Products</th>
+																		<th class="text-center">Quantity</th>
+																		<th class="text-center">Price</th>
+																	</tr>
+																</thead>
+																<tbody>
+
+
+																	<tr class="odd">
+																		<td class="mb0 text-center no-border-bottom" rowspan="5">
+																			96544 </td>
+																		<td class="mb0 text-center" rowspan="5">
+																			<div class="ord-img"><a data-page-label="P0"
+																					data-options="{&quot;baseClass&quot; : &quot;fancybox-custom-layout&quot;}"
+																					class="fancybox thumbnail"
+																					href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P0_3976_35021_15342.jpg?1559707237"
+																					data-fancybox="images697"><img
+																						src="response_files/88348_P0_3976_35021_15342_thumb.jpg" rel="697"
+																						width="100px" height="67px">
+																					<div class="zoom"><i class="fa fa-search"></i></div>
+																				</a>
+																				<div class="fancydetails hide">
+																					<h3>SVC - 350gsm Next Day</h3>
+																					<dl class="dl-horizontal">
+																						<dt>Page Name : </dt>
+																						<dd>P0</dd>
+																						<dt>Name : </dt>
+																						<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK: 77, 97,
+																							0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																						<dt>Size : </dt>
+																						<dd>90 x 55mm (standard)</dd>
+																					</dl>
+																				</div>
+																				<div class="hide"><a data-page-label="P1"
+																						data-options="{&quot;baseClass&quot; : &quot;fancybox-custom-layout&quot;}"
+																						class="fancybox thumbnail"
+																						href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P1_3976_35021_15342.jpg?1559707237"
+																						data-fancybox="images697"><img
+																							src="response_files/88348_P1_3976_35021_15342.jpg" rel="697" width="100px"
+																							height="67px">
+																						<div class="zoom"><i class="fa fa-search"></i></div>
+																					</a>
+																					<div class="fancydetails hide">
+																						<h3>SVC - 350gsm Next Day</h3>
+																						<dl class="dl-horizontal">
+																							<dt>Page Name : </dt>
+																							<dd>P1</dd>
+																							<dt>Name : </dt>
+																							<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK: 77,
+																								97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																							<dt>Size : </dt>
+																							<dd>90 x 55mm (standard)</dd>
+																						</dl>
+																					</div><a data-page-label="P2" class="fancybox thumbnail"
+																						href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P2_3976_35021_15342.jpg?1559707237"
+																						data-fancybox="images697"><img
+																							src="response_files/88348_P2_3976_35021_15342.jpg" rel="697" width="100px"
+																							height="67px">
+																						<div class="zoom"><i class="fa fa-search"></i></div>
+																					</a>
+																					<div class="fancydetails hide">
+																						<h3>SVC - 350gsm Next Day</h3>
+																						<dl class="dl-horizontal">
+																							<dt>Page Name : </dt>
+																							<dd>P2</dd>
+																							<dt>Name : </dt>
+																							<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK: 77,
+																								97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																							<dt>Size : </dt>
+																							<dd>90 x 55mm (standard)</dd>
+																						</dl>
+																					</div><a data-page-label="" class="fancybox thumbnail"
+																						href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P3_3976_35021_15342.jpg?1559707237"
+																						data-fancybox="images697"><img
+																							src="response_files/88348_P3_3976_35021_15342.jpg" rel="697" width="100px"
+																							height="67px">
+																						<div class="zoom"><i class="fa fa-search"></i></div>
+																					</a>
+																					<div class="fancydetails hide">
+																						<h3>SVC - 350gsm Next Day</h3>
+																						<dl class="dl-horizontal">
+																							<dt>Name : </dt>
+																							<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK: 77,
+																								97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																							<dt>Size : </dt>
+																							<dd>90 x 55mm (standard)</dd>
+																						</dl>
+																					</div>
+																				</div>
+																			</div> <a class="btn upload_proof btn btn-minier"
+																				href="https://shop.allbizsupplies.biz/admin/order_modify_design.php?op_id=96544&amp;rpage=action">Upload
+																				Design Proof.</a>
+																		</td>
+																		<td class="mb0 pb6 no-border-bottom "><span class="text-primary">SVC - 350gsm Next
+																				Day ( Size : 90 x 55mm (standard) )</span><br><b>Name : </b>Pearson Allied
+																			Health Services - Business cards x 2 types. CMYK: 77, 97, 0, 0 and CMYK: 76, 4,
+																			100, 0 ( SKU : BCARD:3976 )<br><b>Type : </b>Upload Design<br><span
+																				class="label label-primary arrowed-right">File Review</span> <span
+																				class="badge badge-grey no-copy cursor-pointer "
+																				data-original-title="Total Order Product" data-toggle="tooltip"
+																				data-placement="top"></span> <!-- EAP -- START -->
+																			<table>
+																				<tbody>
+																					<tr>
+																						<td></td>
+																					</tr>
+																				</tbody>
+																			</table><!-- EAP -- END -->
+																		</td>
+																		<td class="text-center mb0 no-border-bottom ">
+																			500 </td>
+																		<td class="text-right  mb0 no-border-bottom ">
+																			$ 77.27<br> <!-- EAP -- START -->
+																			<br><br><br>
+																			<table width="100%">
+																				<tbody>
+																					<tr>
+																						<td class="text-right"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!-- EAP -- END -->
+																		</td>
+																	</tr>
+																	<tr class="odd first ord_prd_options">
+																		<td class="word-break">Sides (Single or Double sided) : FRONT &amp; BACK </td>
+																		<td>&nbsp;</td>
+
+																		<td class="text-right">$ 13.64</td>
+																	</tr>
+																	<tr class="odd ord_prd_options">
+																		<td class="word-break">Hole Punch : No </td>
+																		<td>&nbsp;</td>
+
+																		<td class="text-right"></td>
+																	</tr>
+																	<tr class="odd ord_prd_options">
+																		<td class="word-break">Help Me with My File : No, my file is OK </td>
+																		<td>&nbsp;</td>
+
+																		<td class="text-right"></td>
+																	</tr>
+																	<tr class="odd ord_prd_options">
+																		<td class="word-break"></td>
+																		<td>&nbsp;</td>
+																		<td>&nbsp;</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+
+														<div class="row ord_prd_list_table pt0">
+															<div class="col-xs-12 pr6 text-right">
+																<h4>Subtotal : <span class="width-20 pull-right">$ 90.91</span></h4>
+																<h4>Shipping Charges : <span class="width-20 pull-right">$ 6.23</span></h4>
+																<h4>GST : <span class="width-20 pull-right">$ 9.71</span></h4>
+																<h4 class="text-primary">Total : <span class="width-20 pull-right">$ 106.85</span></h4>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-12 col-lg-6 col-xs-12">
+													<div class="row">
+														<div class="col-sm-12 col-lg-12 col-xs-12">
+															<div class="dataTables_wrapper">
+																<ul class="nav nav-tabs">
+																	<li class="active"><a href="#orderhistory" data-toggle="tab">Order History</a></li>
+																</ul>
+																<div class="tab-content">
+																	<div id="orderhistory" class="tab-pane fade in active">
+																		<div class="row pb6">
+																			<div class="col-xs-6 pl0 pr0">
+																				<div class="col-xs-6 pl0 pr0">
+																					<select name="history_type" id="history_type"
+																						class="form-control  history_type">
+																						<option value="0" selected="selected">Entire Order</option>
+																						<option value="96544">SVC
+																							- 350gsm Next Day [ 90 x 55mm (standard) ] Pearson Allied Health
+																							Services - Business cards x 2 types. CMYK: 77, 97, 0, 0 and CMYK: 76,
+																							4, 100, 0 </option>
+																					</select> </div>
+																			</div>
+																		</div>
+																		<div class="widget-box blk-ord-prd-history history_0">
+																			<div class="widget-header widget-header-small">
+																				<h5 class="widget-title smaller">04 Jun, 2019 12:37
+																					<span class="grey"><span
+																							class="label label-primary arrowed-right smaller">Order
+																							Received</span></span>
+																				</h5>
+																				<span class="widget-toolbar no-border">
+																					- User</span><span class="widget-toolbar lighter"><i
+																						class="fa fa-print  grey bigger-120 mr6"
+																						data-original-title="Printer notify : No" data-toggle="tooltip"
+																						data-placement="top"></i><i class="fa fa-user green bigger-120"
+																						data-original-title="Customer notify : Yes" data-toggle="tooltip"
+																						data-placement="top"></i></span>
+																			</div>
+																			<div class="widget-body history_0">
+																				<div class="widget-main">
+																					<i class="ace-icon fa fa-quote-left grey"></i> Please print 250 units of first
+																					design and 250 units of second design. Both uploaded as one PDF document
+																					(front and back). <br>
+																					Colours:<br>
+																					Purple: CMYK: 77, 97, 0, 0 <br>
+																					Green: CMYK: 76, 4, 100, 0 <br>
+																					Background tick is purple colour @ 10% Tint. <br>
+																					<br>Staff Name : ----<br>Section : ----<br>Delivery Collect : ----<br>Time
+																					Diff : 0 H : 0 Min<br><br><span></span>
+																					<div class="space-6"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="widget-box blk-ord-prd-history history_0">
+																			<div class="widget-header widget-header-small">
+																				<h5 class="widget-title smaller">04 Jun, 2019 13:43
+																					<span class="grey"><span
+																							class="label label-pink arrowed arrowed-right smaller">Artwork
+																							Rejected</span></span>
+																				</h5>
+																				<span class="widget-toolbar no-border">
+																					- allBIZ Supplies</span><span class="widget-toolbar lighter"><i
+																						class="fa fa-print  grey bigger-120 mr6"
+																						data-original-title="Printer notify : No" data-toggle="tooltip"
+																						data-placement="top"></i><i class="fa fa-user green bigger-120"
+																						data-original-title="Customer notify : Yes" data-toggle="tooltip"
+																						data-placement="top"></i></span>
+																			</div>
+																			<div class="widget-body history_0">
+																				<div class="widget-main">
+																					<i class="ace-icon fa fa-quote-left grey"></i>
+																					Incorrectly ordered, 500 business cards is for 1 business cards not
+																					two. please advise if you'll like 500 each @ $100ea or 250 each @
+																					$85.00ea.<br>Staff Name : <br>Section : <br>Delivery Collect : <br>Time Diff :
+																					1 H : 6 Min<br><br><span></span>
+																					<div class="space-6"></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="widget-body hidden no_record_history text-center mt6 mb6"><span
+																				class="label label-warning bigger-110"><i
+																					class="ace-icon fa fa-exclamation-triangle"></i> No Records Found</span></div>
+																	</div>
+																	<!-- start for paymen history -->
+																	<!-- End of payment history -->
+																	<!-- Start Quote History -->
+																	<!-- End Quote History -->
+																</div><!-- End of row -->
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End :: Order Details -->
+
+
+										<!-- Start :: Update Order Product Details -->
+										<div class="tab-pane fade" id="TabContent_updateorderproduct">
+											<div class="row" id="blkOrderProductUpdate">
+												<div class="col-xs-12 mb10">
+													<div class="dataTables_wrapper">
+														<div class=" table-responsive">
+															<form name="edit_order_product" id="edit_order_product" method="post"
+																action="https://shop.allbizsupplies.biz/admin/order_action.php?Action=edit_order&amp;OrderId=59407"
+																rel="opsform" novalidate="novalidate">
+																<table class="dataTable table table-striped table-bordered ord_prod_list">
+																	<colgroup>
+																		<col class="col-md-2">
+																		<col class="col-md-2">
+																		<col class="col-md-2">
+																		<col class="col-md-4">
+																		<col class="col-md-1">
+																		<col class="col-md-1">
+																	</colgroup>
+																	<thead>
+																		<tr>
+																			<th>ID</th>
+																			<th align="center">Product Detail</th>
+																			<th align="center">Comments</th>
+																			<th align="center">Status / Remarks</th>
+																			<th align="center"></th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr id="row-96544">
+																			<td>96544</td>
+																			<td width="30%">
+																				<div class="col-xs-5 p0">
+																					<div class="ord-img"><a data-page-label="P0"
+																							data-options="{&quot;baseClass&quot; : &quot;fancybox-custom-layout&quot;}"
+																							class="fancybox thumbnail"
+																							href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P0_3976_35021_15342.jpg?1559707237"
+																							data-fancybox="images189"><img
+																								src="response_files/88348_P0_3976_35021_15342_thumb.jpg" rel="189"
+																								width="150px" height="100px">
+																							<div class="zoom"><i class="fa fa-search"></i></div>
+																						</a>
+																						<div class="fancydetails hide">
+																							<h3>SVC - 350gsm Next Day</h3>
+																							<dl class="dl-horizontal">
+																								<dt>Page Name : </dt>
+																								<dd>P0</dd>
+																								<dt>Name : </dt>
+																								<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK: 77,
+																									97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																								<dt>Size : </dt>
+																								<dd>90 x 55mm (standard)</dd>
+																							</dl>
+																						</div>
+																						<div class="hide"><a data-page-label="P1"
+																								data-options="{&quot;baseClass&quot; : &quot;fancybox-custom-layout&quot;}"
+																								class="fancybox thumbnail"
+																								href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P1_3976_35021_15342.jpg?1559707237"
+																								data-fancybox="images189"><img
+																									src="response_files/88348_P1_3976_35021_15342.jpg" rel="189"
+																									width="150px" height="100px">
+																								<div class="zoom"><i class="fa fa-search"></i></div>
+																							</a>
+																							<div class="fancydetails hide">
+																								<h3>SVC - 350gsm Next Day</h3>
+																								<dl class="dl-horizontal">
+																									<dt>Page Name : </dt>
+																									<dd>P1</dd>
+																									<dt>Name : </dt>
+																									<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK:
+																										77, 97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																									<dt>Size : </dt>
+																									<dd>90 x 55mm (standard)</dd>
+																								</dl>
+																							</div><a data-page-label="P2" class="fancybox thumbnail"
+																								href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P2_3976_35021_15342.jpg?1559707237"
+																								data-fancybox="images189"><img
+																									src="response_files/88348_P2_3976_35021_15342.jpg" rel="189"
+																									width="150px" height="100px">
+																								<div class="zoom"><i class="fa fa-search"></i></div>
+																							</a>
+																							<div class="fancydetails hide">
+																								<h3>SVC - 350gsm Next Day</h3>
+																								<dl class="dl-horizontal">
+																									<dt>Page Name : </dt>
+																									<dd>P2</dd>
+																									<dt>Name : </dt>
+																									<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK:
+																										77, 97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																									<dt>Size : </dt>
+																									<dd>90 x 55mm (standard)</dd>
+																								</dl>
+																							</div><a data-page-label="" class="fancybox thumbnail"
+																								href="https://shop.allbizsupplies.biz/images/orders/59407/88348_P3_3976_35021_15342.jpg?1559707237"
+																								data-fancybox="images189"><img
+																									src="response_files/88348_P3_3976_35021_15342.jpg" rel="189"
+																									width="150px" height="100px">
+																								<div class="zoom"><i class="fa fa-search"></i></div>
+																							</a>
+																							<div class="fancydetails hide">
+																								<h3>SVC - 350gsm Next Day</h3>
+																								<dl class="dl-horizontal">
+																									<dt>Name : </dt>
+																									<dd>Pearson Allied Health Services - Business cards x 2 types. CMYK:
+																										77, 97, 0, 0 and CMYK: 76, 4, 100, 0 </dd>
+																									<dt>Size : </dt>
+																									<dd>90 x 55mm (standard)</dd>
+																								</dl>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-xs-7 p0 pl6">
+																					<span class="text-primary">SVC - 350gsm Next Day</span><br><b>Size : </b>90 x
+																					55mm (standard)<br><b>Name : </b>Pearson Allied Health Services - Business
+																					cards x 2 types. CMYK: 77, 97, 0, 0 and CMYK: 76, 4, 100, 0 <br><b>Type :
+																					</b>Upload Design <div class="col-xs-12 p0">
+																						<input type="hidden" name="allowuser_printready_96544"
+																							id="allowuser_printready_96544" value="0" class=""><input type="hidden"
+																							name="productnamecomment_96544" id="productnamecomment_96544"
+																							value="Pearson Allied Health Services - Business cards x 2 types. CMYK: 77, 97, 0, 0  and  CMYK: 76, 4, 100, 0 "
+																							class=""><input type="hidden" name="producttitlecomment_96544"
+																							id="producttitlecomment_96544" value="SVC - 350gsm Next Day" class="">
+																					</div>
+																				</div>
+																			</td>
+																			<td width="30%">
+																				<div id="fileoption96544" class="col-xs-12 p0">
+																					<div class="mb6 ">
+																						<div id="opsfile_file_uploadimage[96544]" class="ops_form_file"
+																							title="Upload File" data-extensions="gif,jpg,jpeg,png,pdf"
+																							data-ajaxfile="common_upload_response.php"
+																							data-large_image_path="images/tempimages/"
+																							data-thumb_image_path="images/tempimages/" data-displayimage="no"
+																							data-querystring="resize_image=no" fuploader="true">
+																							<div class="qq-uploader">
+																								<div class="qq-upload-button btn btn-success btn-file  btn-sm"
+																									style="position: relative; overflow: hidden; direction: ltr;">Upload
+																									File<i
+																										class="fa fa-upload ace-icon bigger-125 icon-on-right"></i><input
+																										type="file" name="file"
+																										style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+																								</div>
+																								<div class="qq-upload-drop-area" style="display: none;"><span
+																										style="float:inherit">Drop file(s) here</span></div>
+																								<div class="fileUploadQueue qq-upload-list showuploadfile"></div>
+																							</div><input type="hidden" name="file_uploadimage[96544]"
+																								class="ops_form_file_element" id="file_uploadimage[96544]" value="">
+																							<div class="ops_form_file_element_blk hide"></div>
+																						</div>
+																					</div><input type="hidden" name="uploadimage[96544]" id="uploadimage[96544]"
+																						value="" class="">
+																				</div>
+																				<div class="form-group">
+																					<div class="col-xs-11 mb6 mt6 p0 "><select name="order_comments_message"
+																							id="order_comments_message" class="form-control "
+																							onchange="fillcomments(this,'orderproductcomments_96544')">
+																							<option value="" selected="selected">Select predefine comment</option>
+																							<option
+																								value="Your order has been modified, please check details below and if you have any questions don't hesitate to ask.">
+																								Order Modified</option>
+																							<option value="Your order has been shipped. Please accept this as your Dispatch Advice.
+Below are your tracking details.">Shipping details Updated</option>
+																							<option
+																								value="The product has been deleted successfully from the order as discussed with the customer.">
+																								Product Deleted</option>
+																							<option
+																								value="The product has been added successfully to the order as discussed with the customer.">
+																								Product Added</option>
+																							<option
+																								value="Please Download your file from the link below, check through the artwork and details listed on the ARTWORK PROOF and if approved please REPLY to this email with your SIGNED ARTWORK PROOF by the approval due date.">
+																								Artwork uploaded</option>
+																							<option
+																								value="The Product cancellation request has been accepted. Please try not to repeat the same again.">
+																								Product Cancelled</option>
+																							<option
+																								value="We have cancelled the order and will refund your payment. Please note: refunds may take up to 5-6 working days to appear on your statement. Please contact us via email if you require further assistance">
+																								Order Cancelled</option>
+																							<option value="other">Other</option>
+																						</select></div> <span title="Add Predefine Comment"
+																						class="add_comment_message inline align-top ml6 pt6"><a
+																							href="javascript:void(0);" class="add_comment_message_a"><i
+																								class="fa fa-2x fa-plus-circle" aria-hidden="true"></i></a></span>
+																					<div class="col-xs-12 p0 "><textarea name="orderproductcomments_96544"
+																							id="orderproductcomments_96544" class="form-control  " cols="40" rows="3"
+																							placeholder="Remarks"></textarea></div>
+																				</div>
+																			</td>
+																			<td width="35%">
+																				<div class="col-xs-12 p0"><label class="control-label pull-left"><b>Status :</b>
+																					</label>
+																					<div class="col-xs-9">
+																						<select name="orderproductstatus_96544" id="96544" class="form-control ">
+																							<optgroup label="Super Admin's Status">
+																								<option value="267">Proof Approved with Changes</option>
+																								<option value="48">Job Shipped</option>
+																								<option value="49">Print Production</option>
+																								<option value="266">Awaiting Proof with Changes</option>
+																								<option value="264">Cancellation Request</option>
+																								<option value="15">Awaiting Proof Approval</option>
+																								<option value="265">Cancelled</option>
+																								<option value="16">Awaiting Proof</option>
+																								<option value="284">Refunded</option>
+																								<option value="17">Awaiting Artwork</option>
+																								<option value="18">Proof Approved</option>
+																								<option value="19">Proof Rejected</option>
+																								<option value="20">Cancel Job</option>
+																								<option value="21" selected="selected">File Review</option>
+																								<option value="47">Job Complete</option>
+																							</optgroup>
+																							<optgroup label="Store Admin's Status">
+																								<option value="213">waiting for payment</option>
+																								<option value="220">Artwork Rejected</option>
+																							</optgroup>
+																						</select>
+																					</div>
+																				</div>
+																				<div class="col-xs-12">&nbsp;</div>
+																				<div class="col-xs-12 p0">
+																					<label class="control-label pull-left"><b>Notify : </b></label>
+																					<div class="col-xs-10" id="customer_notified_96544">
+																						<label class="checkbox-inline"><input type="checkbox"
+																								name="notify_url_96544" id="checkbox_1" value="1" class=" ace"
+																								checked="checked"><span class="lbl"> Customer</span></label>
+
+
+																					</div>
+																				</div>
+
+																				<div class="col-xs-12">&nbsp;</div>
+																			</td>
+																			<td>
+																				<button class="btn btn-info btn-sm mr6" type="submit" name="orderproductsubmit"
+																					id="orderproductsubmit" value="96544"><i
+																						class="fa fa-floppy-o bigger-125 pr10 mr6"></i> Save</button></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+											<script type="text/javascript">
+												var TP_4OVER_STATUS_UPDATE = 'https://shop.allbizsupplies.biz/cron_script/tp_foreover_order_status_update.php';
+												var TP_4OVER_TRACKING_UPDATE = 'https://shop.allbizsupplies.biz/cron_script/tp_foreover_order_tracking_update.php';
+												var FOREOVER_STATUS_UPDATE_SUCCESS = '4over Record has been updated successfully.';
+												var FOREOVER_STATUS_UPDATE_DANGER = 'Record is not updated due incorrect Job Id';
+											</script>
+										</div>
+										<!-- End :: Update Order Product Details -->
+
+
+										<!-- Start :: Create Shipment tab -->
+										<div class="tab-pane fade " id="TabContent_createshipment">
+											<div class="row" id="blkOrderProductShipment">
+												<div class="col-xs-12 mb10">
+													<div class=" table-responsive">
+														<form name="frm_create_shipment" id="frm_create_shipment" method="post"
+															action="https://shop.allbizsupplies.biz/admin/order_action.php?Action=create_shipment&amp;OrderId=59407"
+															rel="opsform" novalidate="novalidate">
+															<input type="hidden" name="order_id" id="order_id" value="59407" class="">
+															<div class="col-xs-12 listing_div col-lg-7">
+																<div id="ops-table_shipment_wrapper" class="dataTables_wrapper no-footer">
+																	<div class="row search_row form-inline">
+																		<div class="col-sm-8 search-container">
+																			<div id="ops-table_shipment_filter" class="dataTables_filter"><label>Search
+																					:<input type="search" class="form-control input-sm" placeholder=""
+																						aria-controls="ops-table_shipment"></label></div>
+																		</div>
+																		<div class="col-sm-4 tableTools-container text-right">
+																			<div class="btn-group btn-overlap"><a
+																					class="DTTT_button btn btn-white btn-primary btn-bold clearfix"
+																					id="ToolTables_ops-table_shipment_0" title="Print" tabindex="0"
+																					aria-controls="ops-table_shipment"><span><i
+																							class="fa fa-print bigger-110 grey"></i></span></a></div>
+																		</div>
+																		<div id="ops-table_shipment_processing"
+																			class="dataTables_processing col-xs-12 alert alert-info" style="display: none;">
+																			Processing...<br><i class="fa fa-spinner fa-spin bigger-250"></i></div>
+																	</div>
+																	<div class="table-responsive">
+																		<table id="ops-table_shipment"
+																			class="table table-striped table-condensed table-bordered table-hover dataTable no-footer DTTT_selectable"
+																			role="grid" aria-describedby="ops-table_shipment_info">
+																			<thead>
+																				<tr role="row">
+																					<th data-data="product_details" data-orderable="false"
+																						class="sorting_disabled" rowspan="1" colspan="1"
+																						aria-label="Product Details">Product Details</th>
+																					<th class="text-nowrap sorting_disabled" data-data="pkg_details"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Weight - Package (L x W x H)">Weight - Package (L x W x H)</th>
+																					<th data-data="product_weight" class="text-nowrap sorting_disabled"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Total Weight">Total Weight</th>
+																					<th class="text-nowrap sorting_disabled" data-data="shipment_details"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Shipping Company / Tracking">Shipping Company / Tracking</th>
+																					<th class="text-nowrap no-print sorting_disabled" data-data="Action"
+																						data-orderable="false" data-searchable="false" data-class-name="no-print"
+																						rowspan="1" colspan="1" aria-label="Action">Action</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr class="odd">
+																					<td colspan="5" class="dataTables_empty" valign="top"><span
+																							class="label label-warning bigger-110"><i
+																								class="ace-icon fa fa-exclamation-triangle"></i> No Records Found</span>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																	<div class="row footer_row">
+																		<div class="col-sm-4 col-sm-push-8 text-center">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="ops-table_shipment_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button previous disabled"
+																						aria-controls="ops-table_shipment" tabindex="0"
+																						id="ops-table_shipment_previous"><a href="#" class="previous disabled"
+																							style="pointer-events: none;"><i class="fa fa-angle-left"></i></a></li>
+																					<li class="paginate_button next disabled" aria-controls="ops-table_shipment"
+																						tabindex="0" id="ops-table_shipment_next"><a href="#" class="next disabled"
+																							style="pointer-events: none;"><i class="fa fa-angle-right"></i></a></li>
+																				</ul>
+																			</div>
+																		</div>
+																		<div class="col-sm-4 col-sm-pull-4 pt6">
+																			<div class="dataTables_info" id="ops-table_shipment_info" role="status"
+																				aria-live="polite">Showing 0 to 0 of 0 entries </div>
+																		</div>
+																		<div class="col-sm-4 col-sm-pull-4 form-inline text-center">
+																			<div class="dataTables_length" id="ops-table_shipment_length"><label>Show <select
+																						name="ops-table_shipment_length" aria-controls="ops-table_shipment"
+																						class="input-sm">
+																						<option value="10" selected="selected">10</option>
+																						<option value="25">25</option>
+																						<option value="50">50</option>
+																						<option value="100">100</option>
+																					</select> records</label></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12 action_div col-lg-5">
+																<div class="row">
+																	<!-- Row start -->
+																	<!-- Setting Start -->
+																	<div class="col-xs-12">
+
+																		<input type="hidden" name="ORDER_PRODUCT_WISE_TRACKING_ENABLE"
+																			id="ORDER_PRODUCT_WISE_TRACKING_ENABLE" value="ORDER_PRODUCT_WISE_TRACKING_ENABLE"
+																			class=""><input type="hidden" name="shipment_action" id="shipment_action"
+																			value="add" class=""><input type="hidden" name="shipment_id" id="shipment_id"
+																			value="" class="">
+																		<div class="widget-box">
+																			<div class="widget-header">
+																				<h4 class="widget-title dark bigger-140"><i
+																						class="ace-icon fa fa-plus-circle"></i>Create Shipment</h4>
+																				<div class="widget-toolbar"> <a data-action="collapse" href=""> <i
+																							class="ace-icon fa fa-chevron-up"></i> </a> </div>
+																			</div>
+																			<div class="widget-body">
+																				<div class="widget-main">
+																					<div class="form-horizontal">
+																						<div class="form-group block">
+																							<div class="col-xs-12 text-right">
+																								<button class="btn btn-primary btn-sm mr6" name="shipment_submit"
+																									id="btnshipment_submit" value="Save" type="submit"><i
+																										class="fa fa-floppy-o bigger-115 ace-icon"></i> Save</button><button
+																									class="btn btn-primary btn-sm mr6" name="shipment_submit"
+																									id="btnshipmentdwn_submit" value="savedownload" type="submit"><i
+																										class="fa fa-floppy-o bigger-115 ace-icon"></i> Save &amp;
+																									Download</button><button class="btn btn-light btn-sm"
+																									name="reset_shipment" id="reset_shipment" value="Reset"
+																									type="reset"><i class="fa fa-undo bigger-115 ace-icon"></i>
+																									Reset</button>
+
+																							</div>
+																						</div>
+																						<div class="row">
+																							<div class="col-md-4 control-label"><label
+																									for="dynamic_label_generation">Dynamic Label Generation</label></div>
+																							<div class="col-md-2"><label class="control-label "><input type="checkbox"
+																										name="dynamic_label_generation" id="dynamic_label_generation"
+																										value="1" class="form-control ace ace-switch ace-switch-6 "><span
+																										class="lbl"></span></label></div>
+																						</div>
+																						<div class="row mb12">
+																							<div class="col-xs-12">
+																								<div class="form-group">
+																									<div class="col-sm-2"><label for="shipment_type">Shipment</label>
+																									</div>
+																									<div class="col-sm-8  "><label class="radio-inline"><input
+																												type="radio" name="prd_wise_shipment" id="radio_0" value="0"
+																												class=" ace" checked="checked"><span class="lbl"> Order
+																												Wise</span></label><label class="radio-inline"><input
+																												type="radio" name="prd_wise_shipment" id="radio_1" value="1"
+																												class=" ace"><span class="lbl"> Product Wise</span></label>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="col-md-3 ">
+																								<div class="input-group"><label for="shipment_companyname"
+																										class="control-label ">Shipping Company</label>
+																									<div class="col-lg-12 mt6 left-padding-none">
+																										<input type="text" name="shipment_companyname"
+																											id="shipment_companyname" class="form-control "> </div>
+																								</div>
+																							</div>
+																							<div class="col-md-3 ">
+																								<div class="input-group"><label for="shipment_tracking_number"
+																										class="control-label ">Tracking Number</label>
+																									<div class="col-lg-12 mt6 left-padding-none">
+																										<input type="text" name="shipment_tracking_number"
+																											id="shipment_tracking_number" class="form-control "> </div>
+																								</div>
+																							</div>
+																							<div class="col-md-6 prd_orw pckg_dimensions">
+																								<div class="input-group"><label for="pckg_dimensions"
+																										class="control-label ">Package (L x W x H)</label>
+																									<div class="col-lg-12 mt6 left-padding-none">
+																										<input type="text" name="prd_length[59407]" id="prd_length_59407"
+																											class="form-control  input-mini floatval mr6">
+																										<input type="text" name="prd_width[59407]" id="prd_width_59407"
+																											class="form-control  input-mini floatval mr6">
+																										<input type="text" name="prd_height[59407]" id="prd_height_59407"
+																											class="form-control  input-mini floatval">
+																									</div>
+																								</div>
+																							</div>
+
+																						</div>
+																						<table
+																							class="dataTable table table-striped table-bordered create_shipment_action_list">
+																							<thead>
+																								<tr>
+																									<th class="prd_orw" align="center">No</th>
+																									<th class="prd_ckb" style="display: none;"><input type="checkbox"
+																											name="selectall" id="shipc_selectall"></th>
+																									<th>Product Details</th>
+																									<th class="prd_weight">Weight</th>
+																									<th class="prd_ckb_single hide" style="display: none;">Package (L x W
+																										x H)</th>
+																									<th class="prd_ckb_maltiple hide" style="display: none;">Weight -
+																										Package (L x W x H)</th>
+																								</tr>
+																							</thead>
+																							<tbody>
+																								<tr id="row-96544">
+																									<td class="prd_ckb" style="display: none;">
+																										<input type="checkbox" name="product_shipment[]"
+																											id="product_shipment_96544" value="96544">
+																									</td>
+																									<td class="prd_orw">1</td>
+																									<td>
+																										<span class="text-primary">SVC - 350gsm Next Day ( 90 x 55mm
+																											(standard) )</span><br><b>Qty : 500 </b></td>
+																									<td class="prd_weight">
+																										<input type="text" name="product_weight[96544]"
+																											id="product_weight_96544" value="0.95"
+																											class="form-control  input-mini floatval" size="4">
+																									</td>
+																									<td class="prd_ckb_single hide" style="display: none;">
+																										<input type="text" name="prd_length[96544]" id="prd_length_96544"
+																											class="form-control  input-mini floatval"><input type="text"
+																											name="prd_width[96544]" id="prd_width_96544"
+																											class="form-control  input-mini floatval"><input type="text"
+																											name="prd_height[96544]" id="prd_height_96544"
+																											class="form-control  input-mini floatval"> </td>
+																									<td class="prd_ckb_maltiple hide" style="display: none;">
+																										<button class="btn btn btn-success btn-sm mb6 pull-right"
+																											data-tableaddrow="TblProductPackage96544" type="button"><i
+																												class="fa fa-plus-circle pr6"></i>Add</button>
+																										<table
+																											class="table table-striped table-bordered mt12 tbl_product_package"
+																											id="TblProductPackage96544">
+																											<tbody>
+																												<tr>
+																													<td>
+																														<input type="text" name="productWeight[96544][0]"
+																															id="productWeight[96544][0]" value="0.95"
+																															class="form-control  input-mini floatval" size="4"> </td>
+																													<td>
+																														<input type="text" name="productLength[96544][0]"
+																															id="productLength[96544][0]"
+																															class="form-control  input-mini floatval">
+																														<input type="text" name="productWidth[96544][0]"
+																															id="productWidth[96544][0]"
+																															class="form-control  input-mini floatval">
+																														<input type="text" name="productHeight[96544][0]"
+																															id="productHeight[96544][0]"
+																															class="form-control  input-mini floatval"> </td>
+																													<td class="text-center">
+																														<a href="javascript:;" class="remove_inner_row"><i
+																																class="red fa fa-trash ace-icon bigger-140"></i></a>
+																														<a href="javascript:;" class="undo_inner_row hide"><i
+																																class="success fa fa-undo ace-icon bigger-140"></i></a>
+																														<input type="hidden" name="packagerowaction[96544][0]"
+																															id="packagerowaction[96544][0]" value="edit"
+																															class=" packagerowaction"><input type="hidden"
+																															name="packageid[96544][0]" id="packageid[96544][0]"
+																															value="" class=""> </td>
+																												</tr>
+																											</tbody>
+																										</table>
+																									</td>
+																								</tr>
+																								<tr class="prd_weight">
+																									<td colspan="2" align="right"><label for="">Total Weight</label></td>
+																									<td colspan="2"><span class="control-label  total_weight">0.95</span>
+																									</td>
+																								</tr>
+																							</tbody>
+																						</table>
+																						<!-- Start - Order Wise Dynamic Label Generation  -->
+																						<div class="prd_orw mt12 table-responsive dynamic_table"
+																							style="display: none;">
+																							<button class="btn btn btn-success btn-sm mb6 pull-right"
+																								data-tableaddrow="TblOrderPackage" type="button"><i
+																									class="fa fa-plus-circle pr6"></i>Add</button>
+																							<table class="table table-striped table-bordered mt12"
+																								id="TblOrderPackage">
+																								<thead>
+																									<tr>
+																										<th>Weight</th>
+																										<th>Package (L x W x H)</th>
+																										<th>Delete</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																									<tr>
+																										<td>
+																											<input type="text" name="productWeight[0]" id="productWeight[0]"
+																												value="0.95" class="form-control  input-mini floatval" size="4">
+																										</td>
+																										<td>
+																											<input type="text" name="productLength[0]" id="productLength[0]"
+																												class="form-control  input-mini floatval mr6">
+																											<input type="text" name="productWidth[0]" id="productWidth[0]"
+																												class="form-control  input-mini floatval mr6">
+																											<input type="text" name="productHeight[0]" id="productHeight[0]"
+																												class="form-control  input-mini floatval"> </td>
+																										<td class="text-center">
+																											<a href="javascript:;" class="remove_row"><i
+																													class="red fa fa-trash ace-icon bigger-140"></i></a>
+																											<a href="javascript:;" class="undo_row hide"><i
+																													class="success fa fa-undo ace-icon bigger-140"></i></a>
+																											<input type="hidden" name="packagerowaction[0]"
+																												id="packagerowaction[0]" value="edit" class=""><input
+																												type="hidden" name="packageid[0]" id="packageid[0]" value="none"
+																												class=""> </td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+											<script>
+												var RULES_ADDITIONAL_OPTION_REQUIRED = 'Please select at least one checkbox.';
+												var shipmentdata = [];
+												var table_tools = true;
+												var product_wise_shipment = '';
+											</script>
+										</div>
+										<!-- End :: Create Shipment tab -->
+
+										<!-- Start :: Update Order Feedback -->
+										<!-- End :: Update Order Feedback -->
+
+
+										<!-- Start :: Update Order Inventory -->
+										<div class="tab-pane fade " id="TabContent_inventoryhistory">
+
+										</div>
+										<!-- End :: Update Order Inventory -->
+
+										<!-- Start :: Update Order Notes -->
+										<div class="tab-pane fade " id="TabContent_createnotes">
+											<div class="row" id="blkOrderProductShipment">
+												<div class="col-xs-12 mb10">
+													<div class=" table-responsive order_note_listing">
+														<form name="frm_order_notes" id="frm_order_notes" method="post"
+															action="https://shop.allbizsupplies.biz/admin/order_action.php?Action=order_notes&amp;OrderId=59407"
+															rel="opsform" novalidate="novalidate">
+															<div class="col-xs-12 listing_div col-lg-7">
+																<div id="ops-table_note_wrapper" class="dataTables_wrapper no-footer">
+																	<div class="row search_row form-inline">
+																		<div class="col-sm-8 search-container">
+																			<div id="ops-table_note_filter" class="dataTables_filter"><label>Search :<input
+																						type="search" class="form-control input-sm" placeholder=""
+																						aria-controls="ops-table_note"></label></div>
+																		</div>
+																		<div class="col-sm-4 tableTools-container text-right">
+																			<div class="btn-group btn-overlap"><a
+																					class="DTTT_button btn btn-white btn-primary btn-bold clearfix"
+																					id="ToolTables_ops-table_note_0" title="Print" tabindex="0"
+																					aria-controls="ops-table_note"><span><i
+																							class="fa fa-print bigger-110 grey"></i></span></a></div>
+																		</div>
+																		<div id="ops-table_note_processing"
+																			class="dataTables_processing col-xs-12 alert alert-info" style="display: none;">
+																			Processing...<br><i class="fa fa-spinner fa-spin bigger-250"></i></div>
+																	</div>
+																	<div class="table-responsive">
+																		<table id="ops-table_note"
+																			class="table table-striped table-condensed table-bordered table-hover dataTable no-footer DTTT_selectable"
+																			role="grid" aria-describedby="ops-table_note_info">
+																			<thead>
+																				<tr role="row">
+																					<th data-data="note_category" class="text-nowrap sorting_disabled"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Type">Type</th>
+																					<th data-data="added_by" class="text-nowrap sorting_disabled"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Added by">Added by</th>
+																					<th data-data="product_details" data-orderable="false"
+																						class="sorting_disabled" rowspan="1" colspan="1" aria-label="Products"
+																						width="40%">Products</th>
+																					<th data-data="note_comment" class="text-nowrap sorting_disabled"
+																						data-orderable="false" data-searchable="false" rowspan="1" colspan="1"
+																						aria-label="Note" width="40%">Note</th>
+																					<th data-data="Action" class="text-nowrap no-print sorting_disabled"
+																						data-orderable="false" data-searchable="false" data-class-name="no-print"
+																						rowspan="1" colspan="1" aria-label="Action">Action</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr class="odd">
+																					<td colspan="5" class="dataTables_empty" valign="top"><span
+																							class="label label-warning bigger-110"><i
+																								class="ace-icon fa fa-exclamation-triangle"></i> No Records Found</span>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																	<div class="row footer_row">
+																		<div class="col-sm-4 col-sm-push-8 text-center">
+																			<div class="dataTables_paginate paging_simple_numbers"
+																				id="ops-table_note_paginate">
+																				<ul class="pagination">
+																					<li class="paginate_button previous disabled" aria-controls="ops-table_note"
+																						tabindex="0" id="ops-table_note_previous"><a href="#"
+																							class="previous disabled" style="pointer-events: none;"><i
+																								class="fa fa-angle-left"></i></a></li>
+																					<li class="paginate_button next disabled" aria-controls="ops-table_note"
+																						tabindex="0" id="ops-table_note_next"><a href="#" class="next disabled"
+																							style="pointer-events: none;"><i class="fa fa-angle-right"></i></a></li>
+																				</ul>
+																			</div>
+																		</div>
+																		<div class="col-sm-4 col-sm-pull-4 pt6">
+																			<div class="dataTables_info" id="ops-table_note_info" role="status"
+																				aria-live="polite">Showing 0 to 0 of 0 entries </div>
+																		</div>
+																		<div class="col-sm-4 col-sm-pull-4 form-inline text-center">
+																			<div class="dataTables_length" id="ops-table_note_length"><label>Show <select
+																						name="ops-table_note_length" aria-controls="ops-table_note"
+																						class="input-sm">
+																						<option value="10" selected="selected">10</option>
+																						<option value="25">25</option>
+																						<option value="50">50</option>
+																						<option value="100">100</option>
+																					</select> records</label></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12 action_div col-lg-5">
+																<div class="row">
+																	<!-- Row start -->
+																	<!-- Setting Start -->
+																	<div class="col-xs-12">
+																		<input type="hidden" name="note_action" id="order_note_action" value="add"
+																			class=""><input type="hidden" name="order_note_id" id="order_note_id" value=""
+																			class=""><input type="hidden" name="OrderId" id="OrderId" value="59407" class="">
+
+																		<div class="col-xs-12 col-sm-12">
+																			<!-- #section:custom/widget-box -->
+																			<div class="widget-box ui-sortable-handle">
+																				<div class="widget-header">
+																					<h4 class="widget-title dark bigger-140">
+																						<i class="ace-icon fa fa-plus-circle"></i>Add Order Notes</h4>
+																					<div class="widget-toolbar">
+																						<div class="widget-menu">
+																							<a data-action="collapse" href=""> <i
+																									class="ace-icon fa fa-chevron-up"></i></a>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="widget-body">
+																					<div class="widget-main ace-scroll scroll-disabled"
+																						style="position: relative;">
+																						<div class="scroll-track" style="display: none;">
+																							<div class="scroll-bar" style="top: 0px;"></div>
+																						</div>
+																						<div class="scroll-content" style="">
+																							<div class="form-horizontal">
+																								<div class="form-group block">
+																									<div class="col-xs-12 text-right">
+																										<div class="block pull-right form_action_buttons floating-fixed"
+																											data-buttonscroll="true"> <button class="btn btn-primary btn-sm "
+																												type="submit" id="btn-action-saveback" name="Submit"
+																												value="Save &amp; Back"><i
+																													class="fa fa-arrow-left bigger-115 ace-icon"></i> Save &amp;
+																												Back</button><button class="btn btn-light btn-sm" type="reset"
+																												name="btnreset" id="btn-action-reset" value="Reset"><i
+																													class="fa fa-undo bigger-115 ace-icon"></i> <span
+																													class="hidden-xs hidden-sm">Reset</span></button></div>
+																									</div>
+																								</div>
+																							</div>
+																							<!--    -->
+																							<div class="row" id="order_notes">
+																								<div class="form-group">
+																									<div class="order_note_section">
+																										<div class="form-group">
+																											<div class="col-sm-3 control-label"><label
+																													for="order_note_category">Type</label></div>
+																											<div class="col-xs-12 col-sm-8 mb6 order_notes ">
+																												<div class="input-group select-element"><select
+																														name="order_note_category" id="order_note_category"
+																														class="form-control " data-rule-required="1"
+																														data-msg-required="This field is required.">
+																														<option value="1" selected="selected">Generic</option>
+																														<option value="2">Prepress</option>
+																														<option value="3">Graphics</option>
+																														<option value="4">Shipping</option>
+																														<option value="5">Invoice</option>
+																													</select><span
+																														class="erequired input-group-addon block_white align-top red">*</span>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="form-group order_products">
+																									<div class="select_product">
+																										<div class="form-group">
+																											<div class="col-sm-3 control-label"><label>Select Product</label>
+																											</div>
+																											<div class="col-xs-12 col-sm-8 order_note ">
+																												<div class="input-group checkbox-element"><label
+																														class="checkbox"><input type="checkbox"
+																															name="order_products[]" id="checkbox_96544" value="96544"
+																															class="order_productslist ace" 0=""
+																															data-rule-required="true"
+																															data-msg-required="This field is required."
+																															checked="checked"><span class="lbl"> SVC - 350gsm Next
+																															Day</span></label><span
+																														class="erequired input-group-addon block_white align-top red">*</span>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								</div>
+																								<div class="clearfix mb12"></div>
+																								<div class="form-group">
+																									<div class="col-xs-11 mb6 mt6 "><select name="order_comments_message"
+																											id="order_comments_message" class="form-control "
+																											onchange="fillcomments(this,'ordernotecomments')">
+																											<option value="" selected="selected">Select predefine comment
+																											</option>
+																											<option
+																												value="Your order has been modified, please check details below and if you have any questions don't hesitate to ask.">
+																												Order Modified</option>
+																											<option value="Your order has been shipped. Please accept this as your Dispatch Advice.
+Below are your tracking details.">Shipping details Updated</option>
+																											<option
+																												value="The product has been deleted successfully from the order as discussed with the customer.">
+																												Product Deleted</option>
+																											<option
+																												value="The product has been added successfully to the order as discussed with the customer.">
+																												Product Added</option>
+																											<option
+																												value="Please Download your file from the link below, check through the artwork and details listed on the ARTWORK PROOF and if approved please REPLY to this email with your SIGNED ARTWORK PROOF by the approval due date.">
+																												Artwork uploaded</option>
+																											<option
+																												value="The Product cancellation request has been accepted. Please try not to repeat the same again.">
+																												Product Cancelled</option>
+																											<option
+																												value="We have cancelled the order and will refund your payment. Please note: refunds may take up to 5-6 working days to appear on your statement. Please contact us via email if you require further assistance">
+																												Order Cancelled</option>
+																											<option value="other">Other</option>
+																										</select></div> <span title="Add Predefine Comment"
+																										class="add_comment_message inline align-top mt6"><a
+																											href="javascript:void(0);" class="add_comment_message_a"><i
+																												class="fa fa-2x fa-plus-circle"
+																												aria-hidden="true"></i></a></span>
+																									<div class="col-xs-12 pl16 ">
+																										<div class="input-group textarea-element"><textarea
+																												name="ordernotecomments" id="ordernotecomments"
+																												class="form-control  " cols="40" rows="5" placeholder="Remarks"
+																												data-rule-required="true"
+																												data-msg-required="This field is required."></textarea><span
+																												class="erequired input-group-addon block_white align-top red">*</span>
+																										</div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<!-- /section:custom/widget-box -->
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End :: Update Order Notes -->
+
+									</div>
+
+
+								</div>
+
+							</div>
+							<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" id="ShowCommentMsg"
+								class="fancybox-modal-content">
+								<form name="order_comments" id="order_comments" method="POST" data-language="1">
+									<input type="hidden" name="refpage" value="orderaction">
+									<input type="hidden" name="OrderId" value="59407">
+									<div class="modal-dialog modal-md">
+										<div id="modal_detail" class="modal-content no-border">
+											<div class="modal-header">
+												<h4 class="modal-title blue bigger-150">Add Predefine Comment</h4>
+											</div>
+											<div class="modal-body">
+											</div>
+											<div class="modal-footer">
+												<div class="row ">
+													<div class="col-sm-12 text-right">
+														<button type="submit" class="btn btn-sm" name="Submit" id="submit-msg">Submit </button>
+														<button type="button" class="btn btn-link"
+															onclick="parent.jQuery.fancybox.getInstance().close();">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<input type="hidden" id="OrderId" value="59407">
+
+							<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" id="ord_download_dlg"
+								class="fancybox-modal-content">
+								<!-- modal-content -->
+								<div class="modal-dialog modal-md">
+									<div id="modal_detail" class="modal-content no-border">
+										<div class="modal-header"></div>
+										<div class="modal-body"></div>
+									</div>
+									<div class="modal-footer"></div>
+								</div>
+							</div>
+							<!-- Order History -->
+							<div class="fancybox-modal-content" id="OrderHistoryModel">
+								<div class="fancybox-modal-body">
+									<div class="modal-dialog modal-md">
+										<div id="modal_detail" class="modal-content no-border">
+											<div class="modal-header page-header">
+												<h1 class="modal-title"></h1>
+											</div>
+											<div class="modal-body">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script type="text/javascript">
+								var CURRENT_PAGE_URL = 'order_action.php';
+								var ACTION_PAGE_URL = 'order_listing.php';
+								var ORDER_CONFIRM_ARCHIVE = 'Click on OK to move selected orders in archive orders section. Click on Cancel to avoid this action.';
+								var ORDER_CONFIRM_ARCHIVE_TITLE = 'Move to archive confirmation';
+								var REPORT_PAYMENT_REQUEST_CANCEL = 'Cancel';
+								var ORDER_ARCHIVE = 'Archive';
+								var ORDER_ARCHIVE_SUCCESS = 'Order has been archived successfully.';
+								var COMMON_MULDEL_NORECORD_ERROR = 'No records are selected to perform this action.';
+								var FILE_ARCHIVE_ORDER = 'https://shop.allbizsupplies.biz/admin/order_archive_listing.php';
+								var COMMON_DELETE = 'Delete';
+								var FILE_ADMIN_DELETE_ORDERS = 'order_action_delete.php';
+								var ORDER_RESTORE_SUCCESS = 'ORDER_RESTORE_SUCCESS';
+								var IS_WORKFLOW = '';
+								var ORDER_BULK_ERROR_MISSING_FILES = 'Required files are missing.';
+								var FILE_ORDER_COMMENTS_MESSAGE = 'order_comment_message.php';
+								var ORDER_UPLOAD_FIRST_PAGE_REQUIRED = 'Please upload file for first page';
+								var IS_WORKFLOW_ADMIN = 'no';
+								var REFUND_CONFIRMATION_MESSAGE = 'Are you sure you want to save?';
+								var REFUND_ACTION_ALERT_MESSAGE = 'Once you have saved the action it will not be reverted under any circumstances.';
+								var FILE_ADMIN_EDIT_ORDERS = 'order_action.php';
+
+								var redirectPage = 'order_listing.php';
+							</script>
+							<!-- PAGE CONTENT ENDS -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.page-content -->
+			</div>
+		</div><!-- /.main-content -->
+
+		<div class="footer">
+			<div class="footer-inner">
+				<!-- #section:basics/footer -->
+				<div class="footer-content">
+					<span class="text-muted bigger-120">
+						<small>Copyright Â©2019. All Rights Reserved. </small>
+					</span>
+				</div>
+				<!-- /section:basics/footer -->
+			</div>
+			<!--Start of Zopim Live Chat Script-->
+			<script
+				type="text/javascript"> window.$zopim || (function (d, s) { var z = $zopim = function (c) { z._.push(c) }, $ = z.s = d.createElement(s), e = d.getElementsByTagName(s)[0]; z.set = function (o) { z.set._.push(o) }; z._ = []; z.set._ = []; $.async = !0; $.setAttribute("charset", "utf-8"); $.src = "//v2.zopim.com/?2krVmKwEmX9Rjl7ARV0rJiIkEfnE6zaO"; z.t = +new Date; $.type = "text/javascript"; e.parentNode.insertBefore($, e) })(document, "script"); </script>
+			<!--End of Zopim Live Chat Script-->
+		</div>
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse display">
+			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
+	</div><!-- /.main-container -->
+
+
+	<script type="text/javascript">var DEV_MODE = false; var SITE_URL = "https:\/\/shop.allbizsupplies.biz\/"; var SITE_ADMIN_URL = "https:\/\/shop.allbizsupplies.biz\/admin\/"; var FILE_FILENAME_WITH_EXT = "order_action.php"; var COMMON_CONFIRM_DELETE = "Are you sure you want to delete this record?"; var DIR_HTTP_THIRDPARTY = "https:\/\/shop.allbizsupplies.biz\/thirdparty\/"; var ADMIN_TEMPLATE_NO_IMAGES_PER_ROW = "4"; var DIR_HTTP_ADMIN_IMAGES = "https:\/\/shop.allbizsupplies.biz\/admin\/includes\/images\/"; var DIR_CKEDITOR = "https:\/\/shop.allbizsupplies.biz\/thirdparty\/ckeditor\/"; var FILE_EDITOR_PREVIEW_PAGE = "https:\/\/shop.allbizsupplies.biz\/sample_preview.php"; var ADMIN_COMMON_PREVIEW = "ADMIN_COMMON_PREVIEW"; var COMMON_UPLOAD_DROP_FILES = "Drop file(s) here"; var COMMON_UPLOAD_CANCEL = "Cancel"; var COMMON_UPLOAD_FAILED = "COMMON_UPLOAD_FAILED"; var COMMON_UPLOAD_ERROR = "Upload error"; var COMMON_NONE_SELECTED = "None selected"; var NO_LINKS_FOUND = "No any links found"; var COMMON_SELECTED = "Selected"; var COMMON_ALL_SELECTED = "All selected"; var COMMON_SEARCH = "Search"; var COMMON_SELECT_ALL = "Select All"; var COMMON_NOTIFICATION = "Notifications"; var COMMON_NO_NOTIFICATION_AVAILABLE = "No Notifications Available"; var SITE_NAME = "EditandPrint"; var SITE_LOGO_PATH = "https:\/\/shop.allbizsupplies.biz\/images\/websitelogos\/128\/retailer_site_logo2.png"; var COMMON_NOTIFICATION_WINDOW = "You have %s new notification\/s"; var DT_SEARCH = "Search :"; var DT_SHOW_RECORDS = "Show _MENU_ records"; var DT_PAGE_INFO = "Showing _START_ to _END_ of _TOTAL_ entries"; var DT_PAGE_INFO_FILTER = " - filtering from _MAX_ records"; var DT_PAGE_INFO_FILTER_EMPTY = "Showing 0 to _END_ of _TOTAL_ entries"; var DT_PAGE_INFO_EXTRA = " "; var DT_LOADING = "Please wait - loading..."; var DT_PROCESSING = "Processing...<br\/><i class=\"fa fa-spinner fa-spin bigger-250\"><\/i>"; var DT_EMPTY_TABLE = "<span class=\"label label-warning bigger-110\"><i class=\"ace-icon fa fa-exclamation-triangle\"><\/i> No Records Found<\/span>"; var DT_PAGE_PREVIOUS = "<i class=\"fa fa-angle-left\"><\/i>"; var DT_PAGE_NEXT = "<i class=\"fa fa-angle-right\"><\/i>"; var DT_PAGE_FIRST = "<i class=\"fa fa-angle-double-left\"><\/i>"; var DT_PAGE_LAST = "<i class=\"fa fa-angle-double-right\"><\/i>"; var DT_TABLE_COPIED = "<h3 class=\"no-margin-top smaller\">Table copied<\/h3><p>Copied to the clipboard.<\/p>"; var DT_PRINT_HELP = "<h3 class=\"no-margin-top\">Print view<\/h3><p>Please use your browser's print function to print this table.<\/p><p>Press <b>escape<\/b> when finished.<\/p>"; var COMMON_EXPORT = "Export"; var COMMON_EXPORT_PDF = "Export to PDF"; var COMMON_EXPORT_XLS = "Export to Excel"; var COMMON_COPY = "Copy to clipboard"; var COMMON_PRINT = "Print"; var COMMON_UNSELECT_ALL = "Unselect All"; var COMMON_STATUS_SUCCESS = "Status has been updated successfully."; var COMMON_STATUS_ERROR = "Status was not updated due to an error."; var COMMON_DELETE_SUCCESS = "Record has been deleted successfully."; var COMMON_DELETE_ERROR = "Record was not deleted due to an error."; var COMMON_SERVER_RESPONSE_ERROR = "Request can not be completed due to server problem."; var COMMON_UPDATE_SUCCESS = "Record has been updated successfully."; var COMMON_UPDATE_ERROR = "Record was not updated due to an error."; var DEFAULT_OPTION_DELETE = "Default option cannot be deleted"; var ADMIN_COMMON_ROWS_PER_PAGE = "10"; var COMMON_SORT = "Sort"; var COMMON_EXPORT_CSV = "Export to CSV"; var COMMON_EDIT_SORT = "Edit Sort Order"; var COMMON_SAVE_SORT = "Save Sort Order"; var COMMON_CANCEL_SORT = "Cancel\/Reset Sort Order"; var dates = "{\"tillnow\":{\"from\":\"\",\"to\":\"2019-06-05\"},\"today\":{\"from\":\"2019-06-05\",\"to\":\"2019-06-05\"},\"yesterday\":{\"from\":\"2019-06-04\",\"to\":\"2019-06-04\"},\"thisweek\":{\"from\":\"2019-06-03\",\"to\":\"2019-06-05\"},\"lastweek\":{\"from\":\"2019-05-27\",\"to\":\"2019-06-02\"},\"thismonth\":{\"from\":\"2019-06-01\",\"to\":\"2019-06-05\"},\"lastmonth\":{\"from\":\"2019-05-01\",\"to\":\"2019-05-31\"},\"thisyear\":{\"from\":\"2019-01-01\",\"to\":\"2019-06-05\"},\"lastyear\":{\"from\":\"2018-01-01\",\"to\":\"2018-12-31\"}}"; var VALIDATE_REQUIRED = "This field is required."; var VALIDATE_EMAIL = "Please enter a valid email address."; var VALIDATE_URL = "Please enter a valid URL."; var VALIDATE_DATE = "Please enter a valid date."; var VALIDATE_NUMBER = "Please enter a valid number."; var VALIDATE_DIGIT = "Please enter only digits."; var VALIDATE_CREDITCARD = "Please enter a valid credit card number."; var VALIDATE_EQUALTO = "Please enter the same value again."; var VALIDATE_MINLENGTH = "Please enter at least {0} characters."; var VALIDATE_MAXLENGTH = "Please enter maximum {0} characters."; var VALIDATE_MINVALUE = "Please enter a value greater than or equal to {0}."; var VALIDATE_MAXVALUE = "Please enter a value less than or equal to {0}."; var VALIDATE_RANGEVALUE = "Please enter a value between {0} and {1}."; var VALIDATE_STRINGLENGTH = "Please enter a value between {0} and {1} characters long."; var VALIDATE_FILE_UPLOAD_INVALID_EXTENSION = "File has an invalid extension, it should be one of {extensions}."; var VALIDATE_FIX_FIELD_MESSAGE = "Please fix this field."; var VALIDATE_INVALID_DATE_ERROR = "Please enter a valid date (ISO)."; var VALIDATE_INVALID_EXTENSION_ERROR = "Please enter a value with a valid extension."; var DD_SHOW_ALL = "Show All"; var DD_SEARCH = "Search"; var DD_ADD_SELECTED = "Move selected"; var DD_ADD_ALL = "Move all"; var DD_REMOVE_SELECTED = "Remove selected"; var DD_REMOVE_ALL = "Remove All"; var DD_COUNT_INFO = "Showing all {0}"; var DD_FILTER_COUNT_INFO = "<span class=\"label label-warning\">Filtered<\/span> {0} from {1}"; var DD_EMPTY_INFO = "Empty list"; var COMMON_CONFIRM_IMAGE_DELETE = "Are you sure you want to delete image permanently?"; var COMMON_MULDEL_NORECORD_ERROR = "No records are selected to perform this action."; var FILE_PIN_UNPIN_LINK = "admin_pin_unpin_link.php"; var HEADER_UNPIN_PAGE = "Unpin this page"; var HEADER_PIN_PAGE = "Pin this page"; var BTN_RESET = "Reset"; var COMMON_FILTER_HEADING = "Filter"; var FILE_ADMIN_INDEX = "index.php"; var FILE_ADMIN_RESET_PASSWORD = "admin_reset_password.php"; var FILE_USER_ADDRESS = "user_address.php"; var FILE_EMAIL_CONTENT_POPUP = "emailtemplate_content_popup.php"; var COMMON_SESSION_TIMEOUT = "Session timed out !!! <br\/>Redirecting to login page."; var CKEDITOR_BASEPATH = "https:\/\/shop.allbizsupplies.biz\/thirdparty\/ckeditor\/"; var SITE_TEMPLATE = "butterfly"; var AJAX_CALL_TIME_FOR_NOTIFICATION = 3600000; var SWITCH_ADMIN_RELOGIN_WARNING = "Current login will terminate. Would you like to continue login as different user?"; var FILE_RELOGIN = "relogin.php"; var STORE_ADD_PRODUCTS_RIGHT = true; var FILE_TAX_PRODUCT = "product_tax_setting.php"; var IS_WPN_ENABLED = false; var SITE_ADMIN_DIRECTORY = "admin\/"; var IS_MOBILE_DEVICE = false; var pin_unpin_ses_data = false; var pin_unpin_ses_val = true; var records_per_page = [[10, 25, 50, 100], [10, 25, 50, 100]];
+		var templates_per_page = { "1": [8, 24, 48, 100], "0": [8, 24, 48, 100] };
+		var COMMON_TEMPLATES_PER_PAGE = 8;
+		dates = JSON.parse(dates);
+	</script>
+	<script src="response_files/admin_script.js"></script>
+	<script src="response_files/admin_tps_common.js"></script>
+	<script src="response_files/order_listing.js"></script>
+	<script src="response_files/jquery.js"></script>
+	<script>
+		jQuery(function ($) {
+			$('#ops-table_note').OPSTable({
+				'tabletools': true,
+				"data": [],
+				'stateSave': true
+			});
+			$('#frm_order_notes').opsform({
+				'validateoptions': {
+					ignore: ".ignore",
+				},
+			});
+			$("#order_note_category").change(function () {
+				var note_category = $(this).val()
+				var actio_type = $('#order_note_action').val();
+
+				if (note_category == 5) {
+					$('.order_note').find(':input[type="checkbox"]').addClass('ignore');
+				} else {
+					$('.order_note').find(':input[type="checkbox"]').removeClass('ignore');
+				}
+				if (note_category > 1) {
+					var order_id = $('#OrderId').val();
+					var order_note_id = $('#order_note_id').val();
+					$.ajax({
+						type: "POST",
+						url: FILE_ADMIN_EDIT_ORDERS,
+						dataType: "json",
+						data: 'note_type=' + note_category + '&OrderId=' + order_id + '&action_type=' + actio_type + '&order_note_id=' + order_note_id,
+						success: function (results) {
+							var response = results.selected;
+							var notselected = results.other;
+							if (notselected !== "undefined") {
+								notselected = notselected.split(',');
+							}
+							if (response != 'fail') {
+								var defiend_method = response.split(',');
+								$(".order_productslist").each(function () { // to disable already used payment method.
+									var current_value = $(this).val();
+									var options = $(this);
+									if (actio_type != 'update') {
+										defiend_method.forEach(function (element) {
+											if (element == current_value) {
+												options.prop('disabled', true);
+											} else if (jQuery.inArray(current_value, defiend_method) === -1) {
+												options.prop('disabled', false);
+											}
+										});
+									} else {
+										if (notselected && actio_type == 'update') {
+											if (defiend_method.indexOf(current_value) >= 0) {
+												options.prop('disabled', false);
+											} else {
+												if (notselected.indexOf(current_value) >= 0) {
+													options.prop('disabled', true);
+												} else {
+													options.prop('disabled', false);
+												}
+											}
+										}
+										if (defiend_method && actio_type != 'update') {
+											if (defiend_method.indexOf(current_value) >= 0) {
+												options.prop('disabled', true);
+											} else {
+												options.prop('disabled', false);
+											}
+										}
+									}
+								});
+							} else {
+								$(".order_productslist").each(function () {
+									var options = $(this);
+									var current_value = $(this).val();
+									if (notselected && actio_type == 'update') {
+										if (notselected.indexOf(current_value) >= 0) {
+											options.prop('disabled', true);
+										} else {
+											options.prop('disabled', false);
+										}
+									} else {
+										options.prop('disabled', false);
+									}
+								});
+							}
+						}
+					});
+				}
+				if (note_category == 1) {
+					$('.order_productslist').prop('disabled', false);
+				}
+			}).trigger('change');
+		});
+	</script>
+	<script>jQuery(document).ready(function ($) { $("[name='livezilla_chat_button']").appendTo("#lchat"); }); </script>
+</body>
+
+</html>
