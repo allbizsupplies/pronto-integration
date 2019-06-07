@@ -29,7 +29,7 @@ try {
 
 	data := client.getOrderData(oid)
 
-  client.enterOrderId("ENP-" . oid)
+  client.enterOrderId("WEB-" . oid)
 	client.enterShippingAddress(data)
 	client.enterLineItems(data)
 	client.enterCustomerReference(data)
