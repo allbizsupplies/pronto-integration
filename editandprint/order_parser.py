@@ -251,11 +251,14 @@ def parse_shipping_address(soup):
 
     address = {}
 
-    # Extract contact name and email
+    # Extract contact name
     address["contact_name"] = BeautifulSoup(lines[0].strip(), "html.parser").text
     del lines[0]
-    address["contact_email"] = lines[0].strip()
-    del lines[0]
+
+    # Extract email, if present.
+    if re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", lines[0].strip()):
+        address["contact_email"] = lines[0].strip()
+        del lines[0]
 
     # Extract company name.
     for index, line in enumerate(lines):
@@ -295,7 +298,7 @@ def parse_shipping_address(soup):
     address["suburb"] = components.pop()
 
     # Discard duplicate suburb.
-    if components[-1] == address["suburb"]:
+    if len(components) > 1 and components[-1] == address["suburb"]:
         components.pop()
 
     # Use whatever's left as the street address
