@@ -32,14 +32,14 @@ class WebClient:
             "OrderId": str(oid)
         }
 
-        response = self.session.get(url, params=params, allow_redirects=False)
+        response = self.session.get(url, params=params, allow_redirects=True)
         
         if response.status_code != 200:
             raise OrderException("Order " + str(oid) + " not found")
 
         soup = BeautifulSoup(response.text, "html.parser")
 
-        if soup.title == "Admin :: Login":
+        if soup.title.text == "Admin :: Login":
             self.refresh_session()
             return self.get_order_html(oid)
 
