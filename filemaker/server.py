@@ -160,7 +160,7 @@ with open("settings.filemaker.yml") as stream:
     settings = yaml.load(stream)
 
 # Get the list of item codes
-item_codes = [line.rstrip() for line in open('item_codes.txt')]
+item_codes = [line.rstrip() for line in open('filemaker/item_codes.txt')]
 
 # Get the FileMaker client
 client = FMClient(settings)
