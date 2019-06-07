@@ -256,7 +256,7 @@ def parse_shipping_address(soup):
     del lines[0]
 
     # Extract email, if present.
-    if re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", lines[0].strip()):
+    if "@" in lines[0]:
         address["contact_email"] = lines[0].strip()
         del lines[0]
 
