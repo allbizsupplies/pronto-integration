@@ -322,3 +322,4 @@ def parse_payment(details):
 
 def is_option_row(tr):
     return "class" in tr.attrs.keys() and "ord_prd_options" in tr.attrs["class"]
+    
