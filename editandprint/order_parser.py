@@ -294,6 +294,10 @@ def parse_shipping_address(soup):
     address["state"] = components.pop()
     address["suburb"] = components.pop()
 
+    # Discard duplicate suburb.
+    if components[-1] == address["suburb"]:
+        components.pop()
+
     # Use whatever's left as the street address
     address["street"] = " ".join(components)
         
@@ -322,4 +326,3 @@ def parse_payment(details):
 
 def is_option_row(tr):
     return "class" in tr.attrs.keys() and "ord_prd_options" in tr.attrs["class"]
-    
