@@ -1,1 +1,1 @@
-cd .. && python -m filemaker.server
+cd .. && python -m editandprint.server
