@@ -14,23 +14,30 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
         data = dict()
 
         if 'order' in params.keys():
+            oid = None
+            
             try:
                 oid = int(params['order'][0])
-
-                # Get the order
-                oid = params['order'][0]
-                (order, error) = client.get_order(oid)
-
-                if error:
-                    data['error'] = error
-
-                # Write the response
-                if order:
-                    data['order'] = order
-                else:
-                    data['error'] = "Order " + str(oid) + " not found."
-            except ValueError:
+            except ValueError as ex:
+                print(ex)
                 data['error'] = params['order'][0] + " is not a valid order number."
+
+            # Get the order
+            try:
+                if oid is not None:
+                    (order, error) = client.get_order(oid)
+
+                    if error:
+                        data['error'] = error
+
+                    # Write the response
+                    if order:
+                        data['order'] = order
+                    else:
+                        data['error'] = "Order " + str(oid) + " not found."
+            except Exception as ex:
+                print("Error:", ex)
+                data['error'] = "Oops, the program has run into a problem."                
         else:
             data['error'] = "No order number given."
             
@@ -156,11 +163,11 @@ class FMClient:
 
 
 # Get the FM settings
-with open("settings.filemaker.yml") as stream:
+with open("settings.yml") as stream:
     settings = yaml.load(stream)
 
 # Get the list of item codes
-item_codes = [line.rstrip() for line in open('filemaker/item_codes.txt')]
+item_codes = [line.rstrip() for line in open('item_codes.txt')]
 
 # Get the FileMaker client
 client = FMClient(settings)
