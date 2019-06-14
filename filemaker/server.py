@@ -1,5 +1,5 @@
 
-from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 import pyodbc
 from urllib.parse import parse_qs, urlsplit
@@ -163,11 +163,12 @@ class FMClient:
 
 
 # Get the FM settings
-with open("settings.yml") as stream:
+with open("settings.filemaker.yml") as stream:
     settings = yaml.load(stream)
 
 # Get the list of item codes
-item_codes = [line.rstrip() for line in open('item_codes.txt')]
+item_code_filepath = "filemaker/item_codes.txt"
+item_codes = [line.rstrip() for line in open(item_code_filepath)]
 
 # Get the FileMaker client
 client = FMClient(settings)
@@ -175,7 +176,7 @@ client = FMClient(settings)
 # Start the HTTP Srever
 port = settings["fm_port"]
 server_address = ('', port)
-httpd = ThreadingHTTPServer(server_address, OrderRequestHandler)
+httpd = HTTPServer(server_address, OrderRequestHandler)
 print("Listening on port " + str(port))
 httpd.serve_forever()
 
