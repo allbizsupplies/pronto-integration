@@ -42,30 +42,6 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
 
 
 
-def get_auth():
-    "Get the auth secret from the user."
-
-    print("Enter your admin login details for the Edit and Print site:")
-
-    auth = { 
-        "username": None,
-        "password": None
-    }
-
-    while(auth["username"] is None):
-        username = input("username: ")
-        if username != "":
-            auth["username"] = username
-
-    while(auth["password"] is None):
-        password = input("password: ")
-        if password != "":
-            auth["password"] = password
-
-    return auth
-
-
-
 def get_client(auth):
     "Get the ENP client."
 
@@ -84,7 +60,7 @@ def get_settings():
 
 
 
-def start():
+def start(settings):
     "Start the HTTP server."
     settings = get_settings()
 
@@ -97,7 +73,11 @@ def start():
 
 
 if __name__ == "__main__":
-    auth = get_auth()
-    client = get_client(auth)
-    start()
+    "Start the HTTP server."
+    settings = get_settings()
+    client = get_client({ 
+        "username": settings["username"],
+        "password": settings["password"]
+    })
+    start(settings)
     
