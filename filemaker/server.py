@@ -173,11 +173,9 @@ item_codes = [line.rstrip() for line in open(item_code_filepath)]
 # Get the FileMaker client
 client = FMClient(settings)
 
-# Start the HTTP Srever
+# Start the HTTP Server
 port = settings["fm_port"]
 server_address = ('', port)
 httpd = HTTPServer(server_address, OrderRequestHandler)
 print("Listening on port " + str(port))
 httpd.serve_forever()
-
-
