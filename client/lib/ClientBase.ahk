@@ -152,7 +152,7 @@ class ClientBase {
 
   getOrderId() {
     ; Get the order number from the user.
-    InputBox, oid , "ENP", "Enter the order number from the jobsheet"
+    InputBox, oid , ENP, Enter the order number from the jobsheet
 
     ; Exit if user cancelled or nothing entered.
     if (errorLevel > 0) {
