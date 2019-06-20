@@ -115,12 +115,22 @@ class ShippingAddress(Entity):
 
 
     def get_pronto_format(self):
+        address_name = None
+        if self.company_name:
+            address_name = self.company_name[:30]
+        elif self.contact_name:
+            address_name = self.contact_name[:30]
+
+        attention_note = None
+        if self.company_name:
+            attention_note = "ATTN: " + self.contact_name[:24]
+        
         return {
-            "name": self.company_name[:30],
+            "name": address_name,
             "address_1": self.street[:30],
             "address_2": self.suburb[:30],
             "address_3": self.state[:30],
-            "address_4": "ATTN: " + self.contact_name[:24],
+            "address_4": attention_note,
             "phone": self.contact_phone[:15],
             "postcode": self.postcode,
         }
