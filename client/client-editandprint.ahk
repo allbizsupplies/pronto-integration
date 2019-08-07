@@ -22,7 +22,7 @@ class Client extends ClientBase {
 
 
 try {
-	client := new Client(A_SCRIPTDIR . "/../settings.editandprint.yml")
+	client := new Client("Web Orders", A_SCRIPTDIR . "/../settings.editandprint.yml")
 	client.checkSaleOpen()
 
 	oid := client.getOrderId()

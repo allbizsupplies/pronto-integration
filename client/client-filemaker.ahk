@@ -10,7 +10,7 @@ class Client extends ClientBase {
 
 
 try {
-	client := new Client(A_SCRIPTDIR . "/../settings.filemaker.yml")
+	client := new Client("FileMaker", A_SCRIPTDIR . "/../settings.filemaker.yml")
 	client.checkSaleOpen()
 
 	oid := client.getOrderId()

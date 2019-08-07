@@ -23,8 +23,9 @@ global POS_READY_FOR_ADDR_DATE := "Enter the estimated delivery date for this or
 class ClientBase {
 
 
-  __new(settings_filepath) {
-    this.pronto := new ThinClientController()
+  __new(window_title, settings_filepath) {
+    this.window_title := window_title
+    this.pronto := new ThinClientController()    
 
     ; Get the host and port from the settings file.
     Loop, Read, %settings_filepath%
@@ -101,14 +102,14 @@ class ClientBase {
     if (lineItem.quantity) {
       this.pronto.sendOnStatus("*{Enter}", POS_READY_FOR_ITEM)
       this.pronto.sendRawOnStatus(lineItem.quantity, POS_READY_FOR_QUANTITY)
-      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_QUANTITY)
+      this.pronto.sendOnStatus("{Enter 3}", POS_READY_FOR_QUANTITY)
     }
 
     ; Enter the item price.
     if (lineItem.price) {
       this.pronto.sendOnStatus("P{Enter}", POS_READY_FOR_ITEM)
       this.pronto.sendRawOnStatus(lineItem.price, POS_READY_FOR_PRICE)
-      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_PRICE)
+      this.pronto.sendOnStatus("{Enter 3}", POS_READY_FOR_PRICE)
     }
 
     ; Enter the description as a note.
@@ -151,8 +152,9 @@ class ClientBase {
 
 
   getOrderId() {
+    window_title := this.window_title
     ; Get the order number from the user.
-    InputBox, oid , ENP, Enter the order number from the jobsheet
+    InputBox, oid , %window_title%, Enter the order number from the jobsheet
 
     ; Exit if user cancelled or nothing entered.
     if (errorLevel > 0) {
