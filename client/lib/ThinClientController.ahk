@@ -53,20 +53,24 @@ class ThinClientController {
 
 	; Gets the classname for the thin client status bar.
 	getStatusBarClassname()	{
-		; Get the size and position of the thin client
+		; Get the size and position of the thin client.
 		this.focusClient()
 		WinGetPos, winXPos, winYPos, winWidth, winHeight
 
-		; Remember the initial mousePos
-		MouseGetPos,,,,statusBarClassname
+		; Remember the initial mouse position.
+		MouseGetPos, mouseOrigXPos, mouseOrigYPos
 		
 		; Move the mouse over the status bar, which is in the bottom left of the window.
 		mouseXPos := winXPos + 28
-		mouseYPos := winYPos + winHeight - 8
+		mouseYPos := winYPos + winHeight - 12
 		MouseMove, mouseXPos, mouseYPos
 
 		; Get the classname of the component under the mouse.
 		MouseGetPos,,,,statusBarClassname
+
+		; Move the mouse back to where we found it.
+		MouseMove, mouseOrigXPos, mouseOrigYPos
+
 		return statusBarClassname
 	}
 
