@@ -108,6 +108,9 @@ class FMClient:
                     quantity = record[field['quantity']]
                     price = record[field['unit_price']]
 
+                    if quantity is None:
+                        error = "Order {} has a line ({}) with no quantity.".format(str(oid), item_code)
+
                     # Prepend "ALL-" to code if in list
                     if item_code in item_codes:
                         item_code = "ALL-" + item_code
