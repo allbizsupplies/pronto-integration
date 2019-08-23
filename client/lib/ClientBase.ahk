@@ -68,7 +68,7 @@ class ClientBase {
     if (data.order.reference) {
       reference := data.order.reference
 
-      this.pronto.sendOnStatus("REF{Enter}", POS_READY_FOR_CUS_REF)
+      this.pronto.sendOnStatus("REF{Enter}", POS_READY_FOR_ITEM)
       this.pronto.sendOnStatus(reference, POS_READY_FOR_CUS_REF)
       this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_CUS_REF)
     }
