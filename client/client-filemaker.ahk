@@ -36,8 +36,8 @@ try {
 
 	client.validateLineItems(data)
   client.enterOrderId("FM-" . oid)
-	client.enterLineItems(data)
 	client.enterCustomerReference(data)
+	client.enterLineItems(data)
 } catch ex {
 	MsgBox % "Error: " . ex
 }
