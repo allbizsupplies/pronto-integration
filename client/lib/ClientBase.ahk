@@ -18,6 +18,7 @@ global POS_READY_FOR_ADDR_PHONE := "Enter the delivery Phone number"
 global POS_READY_FOR_ADDR_FAX := "Enter the delivery Fax number"
 global POS_READY_FOR_ADDR_DPID := "Enter the delivery point identifier"
 global POS_READY_FOR_ADDR_DATE := "Enter the estimated delivery date for this order"
+global POS_READY_FOR_CUS_REF := "Enter the customer order no"
 
 
 class ClientBase {
@@ -63,7 +64,18 @@ class ClientBase {
 	}
 
 
-  enterShippingAddress(data) {    
+  enterCustomerReference(data) {
+    if (data.order.reference) {
+      reference := data.order.reference
+
+      this.pronto.sendOnStatus("REF{Enter}", POS_READY_FOR_CUS_REF)
+      this.pronto.sendOnStatus(reference, POS_READY_FOR_CUS_REF)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_CUS_REF)
+    }
+  }
+
+
+  enterShippingAddress(data) {
     if (data.order.address) {
       address := data.order.address
       
