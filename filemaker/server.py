@@ -92,9 +92,13 @@ class FMClient:
         
         if row:
             record = dict(zip(columns, row))
+
+            reference = record[self.fields['ref']]
+            if reference is None:
+                reference = str(oid)
             
             order = {
-                'reference': record[self.fields['ref']],
+                'reference': reference,
                 'items': list()
             }
 
