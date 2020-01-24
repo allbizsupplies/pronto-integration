@@ -163,22 +163,6 @@ class ClientBase {
   }
 
 
-  getOrderId() {
-    window_title := this.window_title
-    ; Get the order number from the user.
-    InputBox, oid , %window_title%, Enter the order number from the jobsheet
-
-    ; Exit if user cancelled or nothing entered.
-    if (errorLevel > 0) {
-      ExitApp
-    }
-    else if (oid == "") {
-			throw { What: "You didn't enter an order number." }
-    }
-
-    return oid
-  }
-
   getUserInput(enterShippingAddressDefault := 0) {
     global orderId
     global enterShippingAddress := enterShippingAddressDefault
