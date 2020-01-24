@@ -96,8 +96,23 @@ class FMClient:
             reference = record[self.fields['ref']]
             if reference is None:
                 reference = str(oid)
+
+            # Get the part of the job name that comes before the separator
+            # as this is usually the person or company's name.
+            full_job_name = record[self.fields['job_name']]
+            job_name = None
+            if full_job_name:
+                job_name = full_job_name.split(" - ")[0].strip()
+
+            # Get the first phone number.
+            full_phone_number = record[self.fields['phone_number']]
+            phone_number = None
+            if full_phone_number:
+                phone_number = full_phone_number.split("/")[0].strip()
             
             order = {
+                'job_name': job_name,
+                'phone_number': phone_number,
                 'reference': reference,
                 'items': list()
             }

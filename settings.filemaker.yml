@@ -12,6 +12,8 @@ fm_table: Allbiz
 fields:
   id: jobsheet number
   ref: Customer Order Number
+  job_name: Job Name
+  phone_number: Ph/Mob
   items:
     -
       code: Varience Item code 1
