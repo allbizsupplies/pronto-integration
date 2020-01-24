@@ -182,13 +182,18 @@ class ClientBase {
   getUserInput(enterShippingAddressDefault := 0) {
     global orderId
     global enterShippingAddress := enterShippingAddressDefault
+    window_title := this.window_title
+    if (window_title == "FileMaker")
+      prompt := "Put job name and phone number in delivery address"
+    else
+      prompt := "Use delivery address from order"
+    if (enterShippingAddressDefault == 1)
+      checked := Checked
+
     Gui, New, , %window_title%
     Gui, Add, Text,, Enter the order number from the jobsheet
     Gui, Add, Edit, vOrderId
-    if (enterShippingAddressDefault == 1)
-      Gui, Add, CheckBox, vEnterShippingAddress Checked, Use delivery address from order
-    else
-      Gui, Add, CheckBox, vEnterShippingAddress, Put job name and phone number in delivery address
+    Gui, Add, CheckBox, vEnterShippingAddress %checked%, %prompt%
     Gui, Add, Button, Default w80 gSubmit, OK
     Gui, Add, Button, w80 x+m yp gCancel, Cancel
     Gui, Show
