@@ -186,7 +186,7 @@ class ClientBase {
     Gui, Add, Text,, Enter the order number from the jobsheet
     Gui, Add, Edit, vOrderId
     if (enterShippingAddressDefault == 1)
-      Gui, Add, CheckBox, vEnterShippingAddress Checked, Put job name and phone number in delivery address
+      Gui, Add, CheckBox, vEnterShippingAddress Checked, Use delivery address from order
     else
       Gui, Add, CheckBox, vEnterShippingAddress, Put job name and phone number in delivery address
     Gui, Add, Button, Default w80 gSubmit, OK
