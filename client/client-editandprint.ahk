@@ -28,11 +28,12 @@ try {
 	oid := client.getOrderId()
 
 	data := client.getOrderData(oid)
+  data.order.reference := oid
 
   client.enterOrderId("WEB-" . oid)
 	client.enterShippingAddress(data)
-	client.enterLineItems(data)
 	client.enterCustomerReference(data)
+	client.enterLineItems(data)
 } catch ex {
 	MsgBox % "Error: " . ex
 }
