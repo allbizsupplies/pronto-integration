@@ -37,7 +37,7 @@ class ThinClientController {
 		; Throw fatal error if Pronto cannot be focused.
 		IfWinNotExist, %title%
 		{
-			throw "Could not focus on Pronto thin client. Check that Pronto is open on live company."
+			throw { What: "Could not focus on Pronto thin client. Check that Pronto is open on live company." }
 		}
 
 		; Set focus on Pronto. 

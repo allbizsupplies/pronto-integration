@@ -30,19 +30,27 @@ try {
 	client := new Client("FileMaker", A_SCRIPTDIR . "/../settings.filemaker.yml")
 	client.checkSaleOpen()
 
-	oid := client.getOrderId()
+	enterShippingAddressDefault := 0
+	input := client.getUserInput(enterShippingAddressDefault)
+	oid := input.oid
+	enterShippingAddress := input.enterShippingAddress
 
 	data := client.getOrderData(oid)
 
 	client.validateLineItems(data)
   client.enterOrderId("FM-" . oid)
+	if (enterShippingAddress == 1) {
+		data.order.address := { name: data.order.job_name, address_1: data.order.phone_number }
+		client.enterShippingAddress(data)
+	}
 	client.enterCustomerReference(data)
 	client.enterLineItems(data)
-} catch ex {
-	MsgBox % "Error: " . ex
+} catch e {
+	MsgBox % "Error: " . e.What . "`nLine: " . e.Line . "`nExtra: " . e.Extra
 }
 
 ExitApp
+
 
 ; Panic button
 ^Esc:: ExitApp

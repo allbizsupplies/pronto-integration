@@ -153,7 +153,7 @@ class ClientBase {
       if (prontoStatus == POS_READY_FOR_ITEM)
         return
       else if (A_Index > 8) {
-        throw "You need to have a sale open in POS and ready to enter items."
+        throw { What: "You need to have a sale open in POS and ready to enter items." }
       }
 
       ; Wait 5ms before checking the status again.
@@ -173,10 +173,44 @@ class ClientBase {
       ExitApp
     }
     else if (oid == "") {
-      throw "You didn't enter an order number."
+			throw { What: "You didn't enter an order number." }
     }
 
     return oid
+  }
+
+  getUserInput(enterShippingAddressDefault := 0) {
+    global orderId
+    global enterShippingAddress := enterShippingAddressDefault
+    Gui, New, , %window_title%
+    Gui, Add, Text,, Enter the order number from the jobsheet
+    Gui, Add, Edit, vOrderId
+    if (enterShippingAddressDefault == 1)
+      Gui, Add, CheckBox, vEnterShippingAddress Checked, Put job name and phone number in delivery address
+    else
+      Gui, Add, CheckBox, vEnterShippingAddress, Put job name and phone number in delivery address
+    Gui, Add, Button, Default w80 gSubmit, OK
+    Gui, Add, Button, w80 x+m yp gCancel, Cancel
+    Gui, Show
+    GuiOpen := True
+    While (GuiOpen) {
+      ; Waiting for Submit or Cancel
+    }
+    Return input
+
+    Submit:
+    {
+      Gui, Submit
+      input := { oid: OrderId, enterShippingAddress: enterShippingAddress }
+      Gui, Destroy
+      GuiOpen := False
+      Return
+    }
+
+    Cancel:
+    {
+      ExitApp
+    }
   }
 
 
