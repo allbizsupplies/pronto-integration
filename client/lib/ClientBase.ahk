@@ -172,7 +172,7 @@ class ClientBase {
     else
       prompt := "Use delivery address from order"
     if (enterShippingAddressDefault == 1)
-      checked := Checked
+      checked := "Checked"
 
     Gui, New, , %window_title%
     Gui, Add, Text,, Enter the order number from the jobsheet
