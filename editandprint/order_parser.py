@@ -6,7 +6,6 @@ import re
 from editandprint.order import ShippingAddress, Order, Item, ItemOption
 
 
-
 class ProductColumn(Enum):
     ID = 0
     IMAGE = 1
@@ -15,12 +14,10 @@ class ProductColumn(Enum):
     PRICE = 5
 
 
-
 class ProductOptionColumn(Enum):
     DETAIL = 0
     QUANTITY = 1
     PRICE = 2
-
 
 
 def build_response_data(order):
@@ -54,20 +51,7 @@ def build_response_data(order):
             "quantity": 1,
             "price": item["price"],
         })
-
-    # # Build the payment data.
-    # payment = order["payment"]
-    # description = "Payment details:" + "\n"
-    # description += payment["method"] + "\n"
-    # description += payment["transaction_id"] + "\n"
-    # description += payment["date"]
-
-    # data["payment"] = {
-    #     "description": description
-    # }
-            
     return data
-
 
 
 def normalise_whitespace(string):
@@ -86,7 +70,6 @@ def normalise_whitespace(string):
                 normalised_string += " " + component
 
     return normalised_string
-
 
 
 def parse_item(item_soup):
@@ -123,12 +106,6 @@ def parse_item(item_soup):
     price = product_price_cell.text.replace("$", "").strip()
     item.price = Decimal(price)
 
-    # # The price is the text in the price cell, and has a dollar sign that
-    # # needs to be removed.
-    # product_quantity_cell = product_row_cells[ProductColumn.QUANTITY.value]
-    # quantity = product_quantity_cell.text.strip()
-    # item.quantity = quantity
-
     # Ignore quantity
     item.quantity = 1
 
@@ -157,7 +134,6 @@ def parse_item(item_soup):
 
     return item
         
-
 
 def parse_items(soup):
     wrapper = soup.find("div", class_="table-responsive ord_prd_list_table")
@@ -234,7 +210,6 @@ def parse_order(html):
     return order
 
 
-
 def parse_shipping_address(soup):
     wrapper = soup.find("div", id="TabContent_orderdetail")
     table = wrapper.find("table", class_="table")
@@ -305,7 +280,6 @@ def parse_shipping_address(soup):
     address["street"] = " ".join(components)
         
     return ShippingAddress(**address)
-
 
 
 def parse_payment(details):
