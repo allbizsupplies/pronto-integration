@@ -5,18 +5,6 @@
 class Client extends ClientBase {
 	enterLineItem(lineItem) {
 		base.enterLineItem(lineItem)
-
-		for index, option in lineItem.options
-		{
-			if (option.value != "No") {
-				description := option.key . ":`n  " . option.value
-
-				this.pronto.sendOnStatus("DN{Enter}", POS_READY_FOR_ITEM)
-				this.pronto.sendRawOnStatus(description, POS_READY_FOR_NOTE)
-				this.pronto.sendOnStatus("{Esc}", POS_READY_FOR_NOTE)
-				this.pronto.sendOnStatus("S", POS_SAVE_NOTE)
-			}
-    }
 	}
 }
 
