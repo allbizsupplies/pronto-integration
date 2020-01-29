@@ -122,6 +122,9 @@ def parse_item(item_soup):
         if value[:2] == "No":
             continue
 
+        # Remove '(click "?" for x)' from option key.
+        key = re.sub(r"\(click.+", "", key)
+
         option.key = key
         option.value = value
 
