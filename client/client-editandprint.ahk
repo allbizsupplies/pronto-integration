@@ -19,6 +19,7 @@ try {
 	enterShippingAddress := input.enterShippingAddress
 
 	data := client.getOrderData(oid)
+	data.order.reference := oid
 
 	client.validateLineItems(data)
   client.enterOrderId("WEB-" . oid)
