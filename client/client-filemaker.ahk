@@ -20,7 +20,8 @@ class Client extends ClientBase {
     }
 
 		if (totalPrice == 0) {
-			throw "The balance for this order is zero."
+			MsgBox % "FileMaker says the balance for this order is zero."
+			ExitApp
 		}
 	}
 }
