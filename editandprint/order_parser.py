@@ -103,7 +103,7 @@ def parse_item(item_soup):
     # The price is the text in the price cell, and has a dollar sign and
     # thousands separator that need to be removed.
     product_price_cell = product_row_cells[ProductColumn.PRICE.value]
-    price = product_price_cell.text.strip().replace("$", "").replace(",", "")
+    price = product_price_cell.text.replace("$", "").replace(",", "").strip()
     item.price = Decimal(price)
 
     # Ignore quantity
@@ -129,7 +129,7 @@ def parse_item(item_soup):
         option.value = value
 
         option_price_cell = cells[ProductOptionColumn.PRICE.value]
-        price = option_price_cell.text.strip().replace("$", "").replace(",", "")
+        price = option_price_cell.text.replace("$", "").replace(",", "").strip()
         if price:
             item.price += Decimal(price)
 
@@ -179,7 +179,7 @@ def parse_shipping_item(soup):
 
     totals = totals_wrapper.find_all("h4")
     shipping_total = totals[1]
-    price = shipping_total.find("span").text.strip().replace("$", "").replace(",", "")
+    price = shipping_total.find("span").text.replace("$", "").replace(",", "").strip()
 
     if price == "0.00":
         return None
