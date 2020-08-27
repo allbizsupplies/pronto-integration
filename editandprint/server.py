@@ -1,7 +1,6 @@
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-import pyodbc
 from urllib.parse import parse_qs, urlsplit
 import yaml
 from editandprint.webclient import WebClient, OrderException
