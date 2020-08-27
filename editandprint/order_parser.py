@@ -87,7 +87,7 @@ def parse_item(item_soup):
     # The SKU is in the text in the detail cell, and is extracted with
     # with a regular expression.
     detail = product_detail_cell.text.strip().replace("\n", " ").replace("\t", "")
-    sku_match = re.search(r"\( SKU : ([A-Za-z0-9:-]+) \)", detail)
+    sku_match = re.search(r"\( Product Sku : ([A-Za-z0-9:-]+) \)", detail)
     if sku_match:
         sku = sku_match.group(1)
         item_code = sku.split(":")[0]
@@ -95,7 +95,7 @@ def parse_item(item_soup):
 
     # The Name is in the text in the detail cell, and is extracted with
     # with a regular expression.
-    name_match = re.search(r"Name : (.+) \( SKU", detail)
+    name_match = re.search(r"Name : (.+) \( Product Sku", detail)
     if name_match:
         name = name_match.group(1)
         item.name = name.strip()
