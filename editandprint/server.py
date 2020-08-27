@@ -55,7 +55,7 @@ def get_settings():
     "Load settings from YAML file."
 
     with open("settings.editandprint.yml") as stream:
-        return yaml.load(stream)
+        return yaml.safe_load(stream)
 
 
 

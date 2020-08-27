@@ -188,7 +188,7 @@ class FMClient:
 
 # Get the FM settings
 with open("settings.filemaker.yml") as stream:
-    settings = yaml.load(stream)
+    settings = yaml.safe_load(stream)
 
 # Get the list of item codes
 item_code_filepath = "filemaker/item_codes.txt"
