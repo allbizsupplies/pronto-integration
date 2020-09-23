@@ -92,6 +92,8 @@ def parse_item(item_soup):
         sku = sku_match.group(1)
         item_code = sku.split(":")[0]
         item.item_code = "ALL-" + item_code
+    else:
+        item.item_code = "ALL-MISC"
 
     # The Name is in the text in the detail cell, and is extracted with
     # with a regular expression.
