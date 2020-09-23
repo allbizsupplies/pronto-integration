@@ -104,7 +104,8 @@ def parse_item(item_soup):
     # thousands separator that need to be removed.
     product_price_cell = product_row_cells[ProductColumn.PRICE.value]
     price = product_price_cell.text.replace("$", "").replace(",", "").strip()
-    item.price = Decimal(price)
+    # Set the price to zero if the cell turns out to contain no price.
+    item.price = Decimal(price) if price != "" else Decimal(0)
 
     # Ignore quantity
     item.quantity = 1
