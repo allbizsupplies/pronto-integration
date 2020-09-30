@@ -7,11 +7,6 @@ from urllib.parse import parse_qs, urlsplit
 import yaml
 
 
-MAX_CONNECTION_ATTEMPTS = 10
-
-CONNECTION_ATTEMPT_DELAY = 30
-
-
 class OrderRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -223,15 +218,17 @@ item_codes = [line.rstrip() for line in open(item_code_filepath)]
 # Get the FileMaker client
 attempts = 0
 connected = False
-while (not connected and attempts < MAX_CONNECTION_ATTEMPTS):
+max_conn_attempts = int(settings["fm_max_connection_attempts"])
+conn_attempt_delay = int(settings["fm_connection_attempt_delay"])
+while (not connected and attempts < max_conn_attempts):
     try:
         client = FMClient(settings)
         connected = True
     except pyodbc.InterfaceError:
         attempts += 1
         print("Unable to connect to FileMaker. Retrying in {} seconds".format(
-            CONNECTION_ATTEMPT_DELAY))
-        sleep(CONNECTION_ATTEMPT_DELAY)
+            conn_attempt_delay))
+        sleep(conn_attempt_delay)
 
 
 # Start the HTTP Server

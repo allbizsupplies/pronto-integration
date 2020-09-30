@@ -9,6 +9,9 @@ fm_user: Print
 fm_password: print
 fm_table: Allbiz
 
+fm_max_connection_attempts: 10
+fm_connection_attempt_delay: 30 # Seconds
+
 fields:
   id: jobsheet number
   ref: Customer Order Number
