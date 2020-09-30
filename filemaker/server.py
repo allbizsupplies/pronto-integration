@@ -4,6 +4,7 @@ import json
 import pyodbc
 from urllib.parse import parse_qs, urlsplit
 import yaml
+from columns import COLUMNS
 
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
@@ -78,11 +79,11 @@ class FMClient:
 
         cursor = self.conn.cursor()
 
-        # Just get the entire job record.
-        cursor.execute(
-            'SELECT * FROM Allbiz WHERE "jobsheet number" = ?',
-            oid
-        )
+        # Get the job record.
+        columns = ",".join(['"{}"'.format(column) for column in COLUMNS])
+        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
+            columns)
+        cursor.execute(statement, oid)
 
         # Get column names
         columns = [column[0] for column in cursor.description]
