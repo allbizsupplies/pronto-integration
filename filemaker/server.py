@@ -5,6 +5,7 @@ import pyodbc
 from time import sleep
 from urllib.parse import parse_qs, urlsplit
 import yaml
+from columns import COLUMNS
 
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
