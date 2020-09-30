@@ -9,7 +9,7 @@ import yaml
 
 MAX_CONNECTION_ATTEMPTS = 10
 
-CONNECTION_ATTEMPT_DELAY = 5
+CONNECTION_ATTEMPT_DELAY = 30
 
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
