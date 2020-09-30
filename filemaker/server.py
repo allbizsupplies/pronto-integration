@@ -8,19 +8,19 @@ import yaml
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
 
-
     def do_GET(self):
         params = parse_qs(urlsplit(self.path).query)
         data = dict()
 
         if 'order' in params.keys():
             oid = None
-            
+
             try:
                 oid = int(params['order'][0])
             except ValueError as ex:
                 print(ex)
-                data['error'] = params['order'][0] + " is not a valid order number."
+                data['error'] = params['order'][0] + \
+                    " is not a valid order number."
 
             # Get the order
             try:
@@ -37,10 +37,10 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                         data['error'] = "Order " + str(oid) + " not found."
             except Exception as ex:
                 print("Error:", ex)
-                data['error'] = "Oops, the program has run into a problem."                
+                data['error'] = "Oops, the program has run into a problem."
         else:
             data['error'] = "No order number given."
-            
+
         body = json.dumps(data)
         # print(body)
         self.send_response(200)
@@ -83,13 +83,13 @@ class FMClient:
             'SELECT * FROM Allbiz WHERE "jobsheet number" = ?',
             oid
         )
-        
+
         # Get column names
         columns = [column[0] for column in cursor.description]
 
         # Get the first row
         row = cursor.fetchone()
-        
+
         if row:
             record = dict(zip(columns, row))
 
@@ -109,7 +109,7 @@ class FMClient:
             phone_number = None
             if full_phone_number:
                 phone_number = full_phone_number.split("/")[0].strip()
-            
+
             order = {
                 'job_name': job_name,
                 'phone_number': phone_number,
@@ -130,7 +130,8 @@ class FMClient:
                     price = record[field['unit_price']]
 
                     if quantity is None:
-                        error = "Order {} has a line ({}) with no quantity.".format(str(oid), item_code)
+                        error = "Order {} has a line ({}) with no quantity.".format(
+                            str(oid), item_code)
 
                     # Prepend "ALL-" to code if in list
                     if item_code in item_codes:
@@ -155,10 +156,10 @@ class FMClient:
 
             if art > 0.00:
                 order['items'].append({
-                        'item_code': "ALL-ART",
-                        'quantity': "1",
-                        'price': str(art),
-                    })
+                    'item_code': "ALL-ART",
+                    'quantity': "1",
+                    'price': str(art),
+                })
 
             # Get the payments
             for field in self.fields['payments']:
@@ -176,14 +177,14 @@ class FMClient:
                     invoice = record[field['invoice']]
 
                     if invoice:
-                        item['description'] = "Paid on invoice " + str(int(invoice))
+                        item['description'] = "Paid on invoice " + \
+                            str(int(invoice))
 
                     order['items'].append(item)
         else:
             error = "Order " + str(oid) + " not found."
 
         return (order, error)
-
 
 
 # Get the FM settings
