@@ -60,6 +60,7 @@ class FMClient:
         fields = settings['fields']
         self.fields = fields
 
+        # Collect the required columns.
         columns = []
         columns.append(fields["id"])
         columns.append(fields["ref"])
@@ -100,7 +101,7 @@ class FMClient:
 
         cursor = self.conn.cursor()
 
-        # Just get the entire job record.
+        # Get the job record.
         statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
             self.columns)
         cursor.execute(statement, oid)
