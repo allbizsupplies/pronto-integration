@@ -1,11 +1,10 @@
 
 import json
 import pyodbc
+import sys
 from urllib.parse import parse_qs, urlsplit
 import yaml
-
-
-TEST_ORDER_ID = 31912
+from columns import COLUMNS
 
 
 class FMClient:
@@ -32,24 +31,24 @@ class FMClient:
 
         return conn
 
-    def show_table(self):
+    def fetch(self, order_id):
         cursor = self.conn.cursor()
 
         # Just get the entire job record.
-        cursor.execute(
-            'SELECT * FROM Allbiz WHERE "jobsheet number" = ?',
-            TEST_ORDER_ID
-        )
-        
+        columns = ",".join(['"{}"'.format(column) for column in COLUMNS])
+        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
+                columns)
+        cursor.execute(statement, order_id)
+
         # Get column names
         columns = [column[0] for column in cursor.description]
 
         # Get the first row
         row = cursor.fetchone()
-
-        # Print the columns
-        for column in columns:
-            print(column)
+        if row:
+            record = dict(zip(columns, row))
+            job_name = record["Job Name"]
+            print(job_name)
 
 
 # Get the FM settings
@@ -58,4 +57,4 @@ with open("../settings.filemaker.yml") as stream:
 
 # Get the FileMaker client
 client = FMClient(settings)
-client.show_table()
+client.fetch(sys.argv[1])
