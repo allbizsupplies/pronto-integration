@@ -2,8 +2,14 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 import pyodbc
+from time import sleep
 from urllib.parse import parse_qs, urlsplit
 import yaml
+
+
+MAX_CONNECTION_ATTEMPTS = 10
+
+CONNECTION_ATTEMPT_DELAY = 5
 
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
@@ -99,7 +105,8 @@ class FMClient:
         cursor = self.conn.cursor()
 
         # Just get the entire job record.
-        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(self.columns)
+        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
+            self.columns)
         cursor.execute(statement, oid)
 
         # Get column names
@@ -214,7 +221,18 @@ item_code_filepath = "filemaker/item_codes.txt"
 item_codes = [line.rstrip() for line in open(item_code_filepath)]
 
 # Get the FileMaker client
-client = FMClient(settings)
+attempts = 0
+connected = False
+while (not connected and attempts < MAX_CONNECTION_ATTEMPTS):
+    try:
+        client = FMClient(settings)
+        connected = True
+    except pyodbc.InterfaceError:
+        attempts += 1
+        print("Unable to connect to FileMaker. Retrying in {} seconds".format(
+            CONNECTION_ATTEMPT_DELAY))
+        sleep(CONNECTION_ATTEMPT_DELAY)
+
 
 # Start the HTTP Server
 port = settings["fm_port"]
