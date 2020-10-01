@@ -4,15 +4,12 @@ from editandprint.order_parser import parse_order
 from bs4 import BeautifulSoup
 
 
-
 class WebClient:
-
 
     def __init__(self, auth):
         self.base_url = "https://shop.allbizsupplies.biz"
         self.auth = auth
         self.session = requests.Session()
-
 
     def refresh_session(self):
         login_url = self.base_url + "/admin/index.php"
@@ -21,9 +18,8 @@ class WebClient:
             "password": self.auth["password"],
             "login": "Login"
         }
-        
-        self.session.post(login_url, data=form, allow_redirects=False)
 
+        self.session.post(login_url, data=form, allow_redirects=False)
 
     def get_order_html(self, oid):
         url = self.base_url + "/admin/order_action.php"
@@ -33,7 +29,7 @@ class WebClient:
         }
 
         response = self.session.get(url, params=params, allow_redirects=True)
-        
+
         if response.status_code != 200:
             raise OrderException("Order " + str(oid) + " not found")
 
@@ -45,11 +41,9 @@ class WebClient:
 
         return response.text
 
-
     def get_order(self, oid):
         order_html = self.get_order_html(oid)
         return parse_order(order_html)
-
 
 
 class OrderException(Exception):

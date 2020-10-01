@@ -9,15 +9,14 @@ class Entity:
 
 class Item(Entity):
 
-
     def __init__(self,
-        item_code=None,
-        label=None,
-        name=None,
-        quantity=None,
-        price=None,
-        options=None
-    ):
+                 item_code=None,
+                 label=None,
+                 name=None,
+                 quantity=None,
+                 price=None,
+                 options=None
+                 ):
         self.item_code = item_code
         self.label = label
         self.name = name
@@ -25,7 +24,6 @@ class Item(Entity):
         self.price = price
         self.options = options if options else []
         self.options = options if options else []
-
 
     def get_pronto_format(self):
         data = {
@@ -35,26 +33,22 @@ class Item(Entity):
             "quantity": str(self.quantity),
             "price": str(formatted_price(self.price)),
         }
-
         data["options"] = []
         for option in self.options:
             option_data = option.get_pronto_format()
             if option_data:
                 data["options"].append(option_data)
-        
         return data
 
 
 class ItemOption(Entity):
 
-
     def __init__(self,
-        key = None,
-        value = None,
-    ):
+                 key=None,
+                 value=None,
+                 ):
         self.key = key
         self.value = value
-
 
     def get_pronto_format(self):
         return {
@@ -63,45 +57,37 @@ class ItemOption(Entity):
         }
 
 
-
 class Order(Entity):
 
-
     def __init__(self,
-        shipping_address=None,
-        items=[]
-    ):
+                 shipping_address=None,
+                 items=[]
+                 ):
         self.shipping_address = shipping_address
         self.items = items
 
-
     def get_pronto_format(self):
         data = {}
-
         data["address"] = self.shipping_address.get_pronto_format()
-
         data["items"] = []
         for item in self.items:
             data["items"].append(item.get_pronto_format())
-        
         return data
-
 
 
 class ShippingAddress(Entity):
 
-
-    def __init__(self, 
-        contact_name=None,
-        contact_email=None,
-        street=None,
-        suburb=None,
-        state=None,
-        postcode=None,
-        country=None,
-        contact_phone=None,
-        company_name=None
-    ):
+    def __init__(self,
+                 contact_name=None,
+                 contact_email=None,
+                 street=None,
+                 suburb=None,
+                 state=None,
+                 postcode=None,
+                 country=None,
+                 contact_phone=None,
+                 company_name=None
+                 ):
 
         self.contact_name = contact_name
         self.contact_email = contact_email
@@ -113,18 +99,15 @@ class ShippingAddress(Entity):
         self.contact_phone = contact_phone
         self.company_name = company_name
 
-
     def get_pronto_format(self):
         address_name = None
         if self.company_name:
             address_name = self.company_name[:30]
         elif self.contact_name:
             address_name = self.contact_name[:30]
-
         attention_note = None
         if self.company_name:
             attention_note = "ATTN: " + self.contact_name[:24]
-        
         return {
             "name": address_name,
             "address_1": self.street[:30],
@@ -139,4 +122,3 @@ class ShippingAddress(Entity):
 def formatted_price(price):
     if price:
         return round(price * Decimal(1.1), 4)
-    
