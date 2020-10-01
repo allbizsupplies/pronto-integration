@@ -4,7 +4,6 @@ import pyodbc
 import sys
 from urllib.parse import parse_qs, urlsplit
 import yaml
-from columns import COLUMNS
 
 
 class FMClient:
@@ -37,7 +36,7 @@ class FMClient:
         # Just get the entire job record.
         columns = ",".join(['"{}"'.format(column) for column in COLUMNS])
         statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
-                columns)
+            columns)
         cursor.execute(statement, order_id)
 
         # Get column names

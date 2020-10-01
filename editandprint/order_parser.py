@@ -22,7 +22,7 @@ class ProductOptionColumn(Enum):
 
 def build_response_data(order):
     data = {}
-    
+
     # Build the address data.
     address = order["address"]
     data["delivery_address"] = {
@@ -57,7 +57,7 @@ def build_response_data(order):
 def normalise_whitespace(string):
     # Remove leading and trailing whitespace
     string = string.strip()
-    
+
     # Remove tab and newline characters
     string = string.replace("\n", " ").replace("\t", "")
 
@@ -75,13 +75,14 @@ def normalise_whitespace(string):
 def parse_item(item_soup):
     item = Item()
     product_row_cells = item_soup["product_row"].find_all("td")
-    
+
     product_detail_cell = product_row_cells[ProductColumn.DETAIL.value]
 
     # The product label is in span.text-primary,
     # but also includes newlines and tab characters that need to be removed.
     label_element = product_detail_cell.find("span", class_="text-primary")
-    label = label_element.text.strip().replace("\n", " ").replace("\t", "").replace("  ", "")
+    label = label_element.text.strip().replace(
+        "\n", " ").replace("\t", "").replace("  ", "")
     item.label = label
 
     # The SKU is in the text in the detail cell, and is extracted with
@@ -132,21 +133,22 @@ def parse_item(item_soup):
         option.value = value
 
         option_price_cell = cells[ProductOptionColumn.PRICE.value]
-        price = option_price_cell.text.replace("$", "").replace(",", "").strip()
+        price = option_price_cell.text.replace(
+            "$", "").replace(",", "").strip()
         if price:
             item.price += Decimal(price)
 
         item.options.append(option)
 
     return item
-        
+
 
 def parse_items(soup):
     wrapper = soup.find("div", class_="table-responsive ord_prd_list_table")
     table = wrapper.find("table", class_="dataTable")
     tbody = table.find("tbody")
     rows = tbody.find_all("tr", recursive=False)
-    
+
     items = []
     item_soup = {}
 
@@ -163,7 +165,7 @@ def parse_items(soup):
                 "product_row": tr,
                 "product_option_rows": []
             }
-    
+
     # Parse the last item.
     if "product_row" in item_soup.keys():
         item = parse_item(item_soup)
@@ -182,7 +184,8 @@ def parse_shipping_item(soup):
 
     totals = totals_wrapper.find_all("h4")
     shipping_total = totals[1]
-    price = shipping_total.find("span").text.replace("$", "").replace(",", "").strip()
+    price = shipping_total.find("span").text.replace(
+        "$", "").replace(",", "").strip()
 
     if price == "0.00":
         return None
@@ -233,7 +236,8 @@ def parse_shipping_address(soup):
     address = {}
 
     # Extract contact name
-    address["contact_name"] = BeautifulSoup(lines[0].strip(), "html.parser").text
+    address["contact_name"] = BeautifulSoup(
+        lines[0].strip(), "html.parser").text
     del lines[0]
 
     # Extract email, if present.
@@ -284,7 +288,7 @@ def parse_shipping_address(soup):
 
     # Use whatever's left as the street address
     address["street"] = " ".join(components)
-        
+
     return ShippingAddress(**address)
 
 

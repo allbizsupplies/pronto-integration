@@ -8,7 +8,6 @@ from editandprint.webclient import WebClient, OrderException
 
 class OrderRequestHandler(BaseHTTPRequestHandler):
 
-
     def do_GET(self):
         # Get the request parameters
         params = parse_qs(urlsplit(self.path).query)
@@ -29,16 +28,16 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                     data['error'] = str(ex)
 
             except ValueError:
-                data['error'] = params['order'][0] + " is not a valid order number."
+                data['error'] = params['order'][0] + \
+                    " is not a valid order number."
         else:
             data['error'] = "No order number given."
-            
+
         body = json.dumps(data)
         # print(body)
         self.send_response(200)
         self.end_headers()
         self.wfile.write(body.encode("UTF-8"))
-
 
 
 def get_client(auth):
@@ -50,13 +49,11 @@ def get_client(auth):
     return client
 
 
-
 def get_settings():
     "Load settings from YAML file."
 
     with open("settings.editandprint.yml") as stream:
         return yaml.safe_load(stream)
-
 
 
 def start(settings):
@@ -70,13 +67,11 @@ def start(settings):
     httpd.serve_forever()
 
 
-
 if __name__ == "__main__":
     "Start the HTTP server."
     settings = get_settings()
-    client = get_client({ 
+    client = get_client({
         "username": settings["username"],
         "password": settings["password"]
     })
     start(settings)
-    
