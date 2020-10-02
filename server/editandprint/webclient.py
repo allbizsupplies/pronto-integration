@@ -1,7 +1,8 @@
 
 import requests
-from editandprint.order_parser import parse_order
 from bs4 import BeautifulSoup
+
+from server.editandprint.order_parser import parse_order
 
 
 class WebClient:
