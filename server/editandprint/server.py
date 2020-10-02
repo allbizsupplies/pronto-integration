@@ -50,9 +50,9 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                     error = str(ex)
                     print("Error: {}".format(error))
                     data['error'] = error
-                except Exception:
-                    error = "the web client has run into a problem."
-                    print("Error: {}".format(error))
+                except Exception as ex:
+                    print(ex)
+                    error = "Oops, the program has run into a problem."
                     data['error'] = error
             except ValueError:
                 data['error'] = params['order'][0] + \

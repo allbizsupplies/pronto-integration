@@ -68,8 +68,8 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                     else:
                         data['error'] = "Order " + str(oid) + " not found."
             except Exception:
+                print(ex)
                 error = "Oops, the program has run into a problem."
-                print("Error: {}".format(error))
                 data['error'] = "Oops, the program has run into a problem."
         else:
             data['error'] = "No order number given."
