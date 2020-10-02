@@ -68,7 +68,7 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                         data['order'] = order
                     else:
                         data['error'] = "Order " + str(oid) + " not found."
-            except Exception:
+            except Exception as ex:
                 print(ex)
                 error = "Oops, the program has run into a problem."
                 data['error'] = "Oops, the program has run into a problem."
