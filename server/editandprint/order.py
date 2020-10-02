@@ -74,7 +74,6 @@ class Order(Entity):
             data["items"].append(item.get_pronto_format())
         return data
 
-
 class ShippingAddress(Entity):
 
     def __init__(self,

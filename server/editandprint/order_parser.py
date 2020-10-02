@@ -3,7 +3,7 @@ from decimal import Decimal
 from enum import Enum
 import re
 
-from editandprint.order import ShippingAddress, Order, Item, ItemOption
+from server.editandprint.order import ShippingAddress, Order, Item, ItemOption
 
 
 class ProductColumn(Enum):
