@@ -18,8 +18,8 @@ def start():
     # Get the FileMaker client.
     attempts = 0
     connected = False
-    max_conn_attempts = int(settings["fm_max_connection_attempts"])
-    conn_attempt_delay = int(settings["fm_connection_attempt_delay"])
+    max_conn_attempts = int(settings["max_connection_attempts"])
+    conn_attempt_delay = int(settings["connection_attempt_delay"])
     while (not connected):
         try:
             client = FMClient(settings)
@@ -34,7 +34,7 @@ def start():
                 print("Unable to connect to FileMaker. Shutting down.")
                 quit()
     # Start the server.
-    port = settings["fm_port"]
+    port = settings["port"]
     server_address = ('', port)
     httpd = HTTPServer(server_address, OrderRequestHandler)
     print("Listening on port " + str(port))

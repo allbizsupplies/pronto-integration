@@ -6,10 +6,10 @@ import pyodbc
 class FMClient:
 
     def __init__(self, settings):
-        self.dsn = settings["fm_dsn"]
-        self.user = settings["fm_user"]
-        self.password = settings["fm_password"]
-        self.table = settings["fm_table"]
+        self.dsn = settings["dsn"]
+        self.user = settings["user"]
+        self.password = settings["password"]
+        self.table = settings["table"]
         fields = settings['fields']
         self.fields = fields
         self.conn = self.get_connection()

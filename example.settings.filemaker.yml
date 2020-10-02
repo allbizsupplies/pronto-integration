@@ -1,17 +1,14 @@
+# The host and port where the server can be found.
 host: HOST
-port: PORT
+port: 33001
 
-# Settings used by server.
-fm_host: HOST
-fm_port: PORT
-fm_dsn: FILEMAKER_ODBC_DSN
-fm_user: FILEMAKER_USER
-fm_password: FILEMAKER_PASSWORD
-fm_table: FILEMAKER_MODEL_TABLE
-
-fm_max_connection_attempts: 10
-fm_connection_attempt_delay: 30 # Seconds
-
+# Settings for ODBC client.
+dsn: FILEMAKER_ODBC_DSN
+user: FILEMAKER_USER
+password: FILEMAKER_PASSWORD
+table: FILEMAKER_MODEL_TABLE
+max_connection_attempts: 10
+connection_attempt_delay: 30 # Seconds
 fields:
   id: jobsheet number
   ref: Customer Order Number
