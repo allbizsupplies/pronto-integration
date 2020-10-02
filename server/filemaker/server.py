@@ -24,6 +24,7 @@ def start():
         try:
             client = FMClient(settings)
             connected = True
+            print("Connected to FileMaker via ODBC bridge.")
         except pyodbc.InterfaceError:
             attempts += 1
             if attempts < max_conn_attempts:
