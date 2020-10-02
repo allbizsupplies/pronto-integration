@@ -41,21 +41,25 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
         if 'order' in params.keys():
             try:
                 oid = int(params['order'][0])
-
                 # Get the order
                 try:
                     oid = params['order'][0]
                     order = client.get_order(oid)
                     data['order'] = order.get_pronto_format()
                 except OrderException as ex:
-                    data['error'] = str(ex)
+                    error = str(ex)
+                    print("Error: {}".format(error))
+                    data['error'] = error
+                except Exception:
+                    error = "the web client has run into a problem."
+                    print("Error: {}".format(error))
+                    data['error'] = error
             except ValueError:
                 data['error'] = params['order'][0] + \
                     " is not a valid order number."
         else:
             data['error'] = "No order number given."
         body = json.dumps(data)
-        # print(body)
         self.send_response(200)
         self.end_headers()
         self.wfile.write(body.encode("UTF-8"))

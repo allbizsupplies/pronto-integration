@@ -28,18 +28,13 @@ class WebClient:
             "Action": "edit_order",
             "OrderId": str(oid)
         }
-
         response = self.session.get(url, params=params, allow_redirects=True)
-
         if response.status_code != 200:
             raise OrderException("Order " + str(oid) + " not found")
-
         soup = BeautifulSoup(response.text, "html.parser")
-
         if soup.title.text == "Admin :: Login":
             self.refresh_session()
             return self.get_order_html(oid)
-
         return response.text
 
     def get_order(self, oid):
@@ -49,6 +44,4 @@ class WebClient:
 
 class OrderException(Exception):
     def __init__(self, message):
-
-        # Call the base class constructor with the parameters it needs
         super(OrderException, self).__init__(message)
