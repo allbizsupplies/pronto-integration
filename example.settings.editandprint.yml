@@ -1,6 +1,6 @@
 # The host and port where the server can be found.
 host: HOST
-port: 33000
+port: 3300
 
 # Settings for web client.
 username: USERNAME
