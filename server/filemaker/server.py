@@ -28,8 +28,11 @@ def start():
         except pyodbc.InterfaceError:
             attempts += 1
             if attempts < max_conn_attempts:
-                print("Unable to connect to FileMaker. Retrying in {} seconds.".format(
-                    conn_attempt_delay))
+                print("Unable to connect to FileMaker. Retrying in {} seconds. Attempt {} of {}".format(
+                    conn_attempt_delay,
+                    attempts,
+                    max_conn_attempts
+                ))
                 sleep(conn_attempt_delay)
             else:
                 print("Unable to connect to FileMaker. Shutting down.")
