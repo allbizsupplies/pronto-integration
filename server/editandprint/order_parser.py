@@ -84,7 +84,7 @@ def parse_item(item_soup):
     sku_match = re.search(r"\( Product Sku : ([A-Za-z0-9:-]+) \)", detail)
     if sku_match:
         sku = sku_match.group(1)
-        item_code = sku.split(":")[0]
+        item_code = sku.split(":")[0].replace("ALL-", "")
         item.item_code = "ALL-" + item_code
     else:
         item.item_code = "ALL-MISC"
