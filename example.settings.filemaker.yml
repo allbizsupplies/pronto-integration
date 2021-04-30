@@ -14,6 +14,7 @@ fields:
   ref: Customer Order Number
   job_name: Job Name
   phone_number: Ph/Mob
+  account_code: Payment method
   items:
     - code: Varience Item code 1
       description: Varience details

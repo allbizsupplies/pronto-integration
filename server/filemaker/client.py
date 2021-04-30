@@ -1,6 +1,7 @@
 
 import os
 import pyodbc
+import re
 
 
 class FMClient:
@@ -19,6 +20,7 @@ class FMClient:
         columns.append(fields["ref"])
         columns.append(fields["job_name"])
         columns.append(fields["phone_number"])
+        columns.append(fields["account_code"])
         for item_fields in fields["items"]:
             columns.append(item_fields["code"])
             columns.append(item_fields["description"])
@@ -82,6 +84,10 @@ class FMClient:
                 'reference': reference,
                 'items': list()
             }
+            # Add the account code if it is valid.
+            account_code = record[self.fields['account_code']]
+            if is_valid_account_code(account_code):
+                order['account_code'] = account_code
             # Get the items
             for field in self.fields['items']:
                 item_code = record[field['code']]
@@ -135,3 +141,20 @@ class FMClient:
         else:
             error = "Order " + str(oid) + " not found."
         return (order, error)
+
+
+INVALID_ACCOUNT_CODES = [
+    None,
+    "ACCOUNT",
+    "CASH",
+    "POS DEPOSIT",
+    "COD ACCOUNT",
+]
+
+
+def is_valid_account_code(account_code):
+    if account_code in INVALID_ACCOUNT_CODES:
+        return False
+
+    matches = re.match("^(A|COD|P|K)[0-9]+$", account_code)
+    return matches is not None

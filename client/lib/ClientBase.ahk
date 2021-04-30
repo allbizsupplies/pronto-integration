@@ -75,6 +75,17 @@ class ClientBase {
   }
 
 
+  selectCustomerAccount(data) {
+    if (data.order.account_code) {
+      account_code := data.order.account_code
+
+      this.pronto.sendOnStatus("CUS-", POS_READY_FOR_ITEM)
+      this.pronto.sendOnStatus(account_code, POS_READY_FOR_ITEM)
+      this.pronto.sendOnStatus("{Enter}", POS_READY_FOR_ITEM)
+    }
+  }
+
+
   enterShippingAddress(data) {
     if (data.order.address) {
       address := data.order.address
@@ -163,21 +174,27 @@ class ClientBase {
   }
 
 
-  getUserInput(enterShippingAddressDefault := 0) {
+  getUserInput(enterShippingAddressDefault := 0, selectCustomerAccountDefault := 1, showSelectCustomerAccount := 0) {
     global orderId
     global enterShippingAddress := enterShippingAddressDefault
+    global selectCustomerAccount :=  selectCustomerAccountDefault
     window_title := this.window_title
     if (window_title == "FileMaker")
-      prompt := "Put job name and phone number in delivery address"
+      shippingAddressPrompt := "Put job name and phone number in delivery address"
     else
-      prompt := "Use delivery address from order"
+      shippingAddressPrompt := "Use delivery address from order"
     if (enterShippingAddressDefault == 1)
-      checked := "Checked"
+      enterShippingAddressValue := "Checked"
+    if (selectCustomerAccountDefault == 1)
+      selectCustomerAccountValue := "Checked"
 
     Gui, New, , %window_title%
     Gui, Add, Text,, Enter the order number from the jobsheet
     Gui, Add, Edit, vOrderId
-    Gui, Add, CheckBox, vEnterShippingAddress %checked%, %prompt%
+    Gui, Add, CheckBox, vEnterShippingAddress %enterShippingAddressValue%, %shippingAddressPrompt%
+    if (showSelectCustomerAccount == 1) {
+      Gui, Add, CheckBox, vSelectCustomerAccount %selectCustomerAccountValue%, "Automatically select the customer's account"
+    }
     Gui, Add, Button, Default w80 gSubmit, OK
     Gui, Add, Button, w80 x+m yp gCancel, Cancel
     Gui, Show
@@ -190,7 +207,7 @@ class ClientBase {
     Submit:
     {
       Gui, Submit
-      input := { oid: OrderId, enterShippingAddress: enterShippingAddress }
+      input := { oid: OrderId, enterShippingAddress: enterShippingAddress, selectCustomerAccount: selectCustomerAccount  }
       Gui, Destroy
       GuiOpen := False
       Return

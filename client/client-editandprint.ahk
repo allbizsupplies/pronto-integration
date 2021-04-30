@@ -14,7 +14,9 @@ try {
 	client.checkSaleOpen()
 
 	enterShippingAddressDefault := 1
-	input := client.getUserInput(enterShippingAddressDefault)
+	selectCustomerAccountDefault := 0
+	showSelectCustomerAccount := 0
+	input := client.getUserInput(enterShippingAddressDefault, selectCustomerAccountDefault, showSelectCustomerAccount)
 	oid := input.oid
 	enterShippingAddress := input.enterShippingAddress
 

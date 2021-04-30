@@ -32,17 +32,23 @@ try {
 	client.checkSaleOpen()
 
 	enterShippingAddressDefault := 0
-	input := client.getUserInput(enterShippingAddressDefault)
+	selectCustomerAccountDefault := 1
+	showSelectCustomerAccount := 1
+	input := client.getUserInput(enterShippingAddressDefault, selectCustomerAccountDefault, showSelectCustomerAccount)
 	oid := input.oid
 	enterShippingAddress := input.enterShippingAddress
+	selectCustomerAccount := input.selectCustomerAccount
 
 	data := client.getOrderData(oid)
 
 	client.validateLineItems(data)
-  client.enterOrderId("FM-" . oid)
+	client.enterOrderId("FM-" . oid)
 	if (enterShippingAddress == 1) {
 		data.order.address := { name: data.order.job_name, address_1: data.order.phone_number }
 		client.enterShippingAddress(data)
+	}
+	if (selectCustomerAccount == 1) {
+		client.selectCustomerAccount(data)
 	}
 	client.enterCustomerReference(data)
 	client.enterLineItems(data)
