@@ -193,7 +193,7 @@ class ClientBase {
     Gui, Add, Edit, vOrderId
     Gui, Add, CheckBox, vEnterShippingAddress %enterShippingAddressValue%, %shippingAddressPrompt%
     if (showSelectCustomerAccount == 1) {
-      Gui, Add, CheckBox, vSelectCustomerAccount %selectCustomerAccountValue%, "Automatically select the customer's account"
+      Gui, Add, CheckBox, vSelectCustomerAccount %selectCustomerAccountValue%, Automatically select the customer's account
     }
     Gui, Add, Button, Default w80 gSubmit, OK
     Gui, Add, Button, w80 x+m yp gCancel, Cancel
