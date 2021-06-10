@@ -130,6 +130,10 @@ class ThinClientController {
 				MsgBox % "Invalid item code.`n`nPlease correct the jobsheet and try again."
 				ExitApp
 			}
+			else if (status == "View note lines") {
+				this.activateHotkey("X")
+				this.waitClientStatus(value)
+			}
 			else if (A_Index > 1000) {
 				; Notify the user if more than 1000 checks have been performed.
 				MsgBox % "The program has run into a problem."
