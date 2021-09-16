@@ -109,7 +109,10 @@ def parse_item(item_soup):
         label = option_detail_cell.text.strip()
         if label == "":
             continue
-        key, value = label.split(" : ")
+        try:
+            key, value = label.split(" : ")
+        except ValueError:
+            continue
         if value[:2] == "No":
             continue
         # Remove '(click "?" for x)' from option key.
