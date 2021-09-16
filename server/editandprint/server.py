@@ -1,6 +1,7 @@
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
+import traceback
 from urllib.parse import parse_qs, urlsplit
 import yaml
 
@@ -51,7 +52,7 @@ class OrderRequestHandler(BaseHTTPRequestHandler):
                     print("Error: {}".format(error))
                     data['error'] = error
                 except Exception as ex:
-                    print(ex)
+                    print(traceback.format_exc())
                     error = "Oops, the program has run into a problem."
                     data['error'] = error
             except ValueError:
