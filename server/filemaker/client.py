@@ -50,25 +50,28 @@ class FMClient:
         conn.setencoding("utf-8")
         return conn
 
+    def fetch_record(self, oid):
+        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
+            self.columns)
+        cursor = self.conn.cursor()
+        cursor.execute(statement, oid)
+        record = cursor.fetchone()
+        return record
+
     def get_order(self, oid):
         order = None
         error = None
+        # Get the job record.
         try:
-            cursor = self.conn.cursor()
+            record = self.fetch_record(oid)
         except pyodbc.Error as ex:
             print("Reconnecting to database")
             self.conn = self.get_connection()
-            cursor = self.conn.cursor()
-        # Get the job record.
-        statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
-            self.columns)
-        cursor.execute(statement, oid)
-        # Get column names
-        columns = [column[0] for column in cursor.description]
-        # Get the first row
-        row = cursor.fetchone()
-        if row:
-            record = dict(zip(columns, row))
+            record = self.fetch_record(oid)
+        if record:
+            # Column names.
+            columns = [column[0] for column in cursor.description]
+            record = dict(zip(columns, record))
             reference = record[self.fields['ref']]
             if reference is None:
                 reference = str(oid)
