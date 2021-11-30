@@ -53,7 +53,12 @@ class FMClient:
     def get_order(self, oid):
         order = None
         error = None
-        cursor = self.conn.cursor()
+        try:
+            cursor = self.conn.cursor()
+        except pyodbc.Error as ex:
+            print("Reconnecting to database")
+            self.conn = self.get_connection()
+            cursor = self.conn.cursor()
         # Get the job record.
         statement = 'SELECT {} FROM Allbiz WHERE "jobsheet number" = ?'.format(
             self.columns)
