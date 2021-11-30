@@ -4,6 +4,7 @@
 # Python
 __pycache__/
 *.pyc
+build/
 
 # Compiled AHK binaries
 *.exe
