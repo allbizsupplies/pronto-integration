@@ -100,12 +100,12 @@ class ShippingAddress(Entity):
         self.company_name = company_name
 
     def get_pronto_format(self):
-        address_name = None
+        address_name = ""
         if self.company_name:
             address_name = self.company_name
         elif self.contact_name:
             address_name = self.contact_name
-        attention_note = None
+        attention_note = ""
         if self.company_name:
             attention_note = "ATTN: " + self.contact_name
         return {
