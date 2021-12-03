@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from common.exceptions import OrderNotFoundException
 
-from editandprint.order_parser import parse_order
+from editandprint.order_parser import check_order_exists, parse_order
 
 
 class WebClient:
@@ -39,6 +39,7 @@ class WebClient:
 
     def get_order(self, oid):
         order_html = self.get_order_html(oid)
+        check_order_exists(order_html, oid)
         order = parse_order(order_html).get_pronto_format()
         order["reference"] = oid
         return order

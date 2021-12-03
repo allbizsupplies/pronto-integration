@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from decimal import Decimal
 from enum import Enum
 import re
+from common.exceptions import OrderNotFoundException
 
 from editandprint.order import ShippingAddress, Order, Item, ItemOption
 
@@ -66,6 +67,12 @@ def normalise_whitespace(string):
             else:
                 normalised_string += " " + component
     return normalised_string
+
+
+def check_order_exists(html, oid):
+    soup = BeautifulSoup(html, "html.parser")
+    if soup.find("h1", string="List Orders"):
+        raise OrderNotFoundException(oid)
 
 
 def parse_item(item_soup):
