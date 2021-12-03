@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-from common.exceptions import SubmitError, ValidationError
+from common.exceptions import OrderNotFoundException, SubmitError, ValidationError
 
 
 class BaseGui:
@@ -127,6 +127,9 @@ class BaseGui:
             self.on_submit(self.process_values())
             self.terminate()
         except SubmitError as ex:
+            self.set_pending(False)
+            messagebox.showerror("Error", str(ex))
+        except OrderNotFoundException as ex:
             self.set_pending(False)
             messagebox.showerror("Error", str(ex))
         except Exception as ex:
