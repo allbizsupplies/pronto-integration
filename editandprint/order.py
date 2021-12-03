@@ -74,6 +74,7 @@ class Order(Entity):
             data["items"].append(item.get_pronto_format())
         return data
 
+
 class ShippingAddress(Entity):
 
     def __init__(self,
@@ -101,18 +102,18 @@ class ShippingAddress(Entity):
     def get_pronto_format(self):
         address_name = None
         if self.company_name:
-            address_name = self.company_name[:30]
+            address_name = self.company_name
         elif self.contact_name:
-            address_name = self.contact_name[:30]
+            address_name = self.contact_name
         attention_note = None
         if self.company_name:
-            attention_note = "ATTN: " + self.contact_name[:24]
+            attention_note = "ATTN: " + self.contact_name
         return {
-            "name": address_name,
+            "name": address_name[:30],
             "address_1": self.street[:30],
             "address_2": self.suburb[:30],
             "address_3": self.state[:30],
-            "address_4": attention_note,
+            "address_4": attention_note[:30],
             "phone": self.contact_phone[:15],
             "postcode": self.postcode,
         }

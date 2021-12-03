@@ -1,0 +1,2 @@
+MouseGetPos,,,, classname
+FileAppend, %classname%, *

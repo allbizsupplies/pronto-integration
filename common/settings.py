@@ -2,6 +2,16 @@
 import os
 import yaml
 
+INVALID_ACCOUNT_CODES = [
+    None,
+    "ACCOUNT",
+    "CASH",
+    "POS DEPOSIT",
+    "COD ACCOUNT",
+]
+
+VALID_ACCOUNT_CODE_PATTERN = "^(A|COD|P|K)[0-9]+$"
+
 
 def get_settings(type):
     cwd = os.getcwd()
