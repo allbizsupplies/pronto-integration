@@ -127,7 +127,7 @@ class ThinClientController:
         self.send_on_status("{Enter}", POS_READY_FOR_ADDR_LINE)
         self.send_on_status(address["address_2"], POS_READY_FOR_ADDR_LINE)
         self.send_on_status("{Enter}", POS_READY_FOR_ADDR_LINE)
-        self.send_on_status(address["address_2"], POS_READY_FOR_ADDR_LINE)
+        self.send_on_status(address["address_3"], POS_READY_FOR_ADDR_LINE)
         self.send_on_status("{Enter 4}{Esc}", POS_READY_FOR_ADDR_LINE)
         self.send_on_status(address["postcode"], POS_READY_FOR_ADDR_POSTCODE)
         self.send_on_status("{Enter}", POS_READY_FOR_ADDR_POSTCODE)
