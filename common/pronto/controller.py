@@ -8,7 +8,7 @@ from common.exceptions import ProntoStatusBarException, ProntoStatusException, S
 SCRIPT_DIR = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), "scripts")
 
-WAIT_DURATION = 1
+DEFAULT_WAIT_DURATION = 1
 WAIT_INTERVAL = 0.05
 
 POS_READY = "Confirm Operator Password"
@@ -17,6 +17,7 @@ POS_READY_FOR_NOTE = "Press the ESC key to finish (or Save/Cancel)"
 POS_READY_FOR_QUANTITY = ""
 POS_READY_FOR_PRICE = "Enter the item price"
 POS_SAVE_NOTE = "Save your changes"
+POS_SELECT_CURRENT_POSTCODE = "Select the current postcode"
 POS_CORRECT = "Correct values on the screen"
 POS_READY_FOR_ADDR_LINE = "Enter the delivery address/instr. line"
 POS_READY_FOR_ADDR_POSTCODE = "Enter the postcode for this address"
@@ -128,11 +129,16 @@ class ThinClientController:
         self.send_on_status(address["address_2"], POS_READY_FOR_ADDR_LINE)
         self.send_on_status("{Enter}", POS_READY_FOR_ADDR_LINE)
         self.send_on_status(address["address_3"], POS_READY_FOR_ADDR_LINE)
-        self.send_on_status("{Enter 4}{Esc}", POS_READY_FOR_ADDR_LINE)
+        self.send_on_status("{Enter 4}", POS_READY_FOR_ADDR_LINE)
+        try:
+            self.send_on_status("{Esc}", POS_SELECT_CURRENT_POSTCODE)
+        except ProntoStatusException:
+            pass
         self.send_on_status(address["postcode"], POS_READY_FOR_ADDR_POSTCODE)
         self.send_on_status("{Enter}", POS_READY_FOR_ADDR_POSTCODE)
         self.send_on_status(address["phone"], POS_READY_FOR_ADDR_PHONE)
         self.send_on_status("{F4}", POS_READY_FOR_ADDR_PHONE)
+
 
     def check_sale_open(self):
         self.focus_window()
@@ -145,21 +151,21 @@ class ThinClientController:
             self.send_input("{Enter}")
         raise SaleNotOpenException()
 
-    def wait_for_status(self, expected_status):
+    def wait_for_status(self, expected_status, wait_duration=DEFAULT_WAIT_DURATION):
         time_waited = 0
-        while(time_waited < WAIT_DURATION):
+        while(time_waited < wait_duration):
             if self.status == expected_status:
                 return
             sleep(WAIT_INTERVAL)
             time_waited += WAIT_INTERVAL
         raise ProntoStatusException(expected_status, self.status)
 
-    def send_on_status(self, value, expected_status):
-        self.wait_for_status(expected_status)
+    def send_on_status(self, value, expected_status, wait_duration=DEFAULT_WAIT_DURATION):
+        self.wait_for_status(expected_status, wait_duration=wait_duration)
         self.send_input(str(value))
 
-    def send_raw_on_status(self, value, expected_status):
-        self.wait_for_status(expected_status)
+    def send_raw_on_status(self, value, expected_status, wait_duration=DEFAULT_WAIT_DURATION):
+        self.wait_for_status(expected_status, wait_duration=wait_duration)
         self.send_raw(str(value))
 
     def send_input(self, value):
