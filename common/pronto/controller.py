@@ -139,7 +139,6 @@ class ThinClientController:
         self.send_on_status(address["phone"], POS_READY_FOR_ADDR_PHONE)
         self.send_on_status("{F4}", POS_READY_FOR_ADDR_PHONE)
 
-
     def check_sale_open(self):
         self.focus_window()
         attempts = 0
