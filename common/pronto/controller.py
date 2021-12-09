@@ -98,11 +98,11 @@ class ThinClientController:
         # Enter the description as a note.
         if "name" or "description" in line_item.keys():
             self.send_on_status("DN{Enter}", POS_READY_FOR_ITEM)
-            if "name" in line_item.keys():
+            if "name" in line_item.keys() and line_item["name"]:
                 self.send_raw_on_status(
                     "Name: " + line_item["name"], POS_READY_FOR_NOTE)
                 self.send_raw_on_status("`n", POS_READY_FOR_NOTE)
-            if "description" in line_item.keys():
+            if "description" in line_item.keys() and line_item["description"]:
                 self.send_raw_on_status(
                     line_item["description"], POS_READY_FOR_NOTE)
         self.send_on_status("{Esc}", POS_READY_FOR_NOTE)
