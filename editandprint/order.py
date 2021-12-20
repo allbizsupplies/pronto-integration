@@ -109,16 +109,24 @@ class ShippingAddress(Entity):
         if self.company_name:
             attention_note = "ATTN: " + self.contact_name
         return {
-            "name": address_name[:30],
-            "address_1": self.street[:30],
-            "address_2": self.suburb[:30],
-            "address_3": self.state[:30],
-            "address_4": attention_note[:30],
-            "phone": self.contact_phone[:15],
-            "postcode": self.postcode,
+            "name": sanitise_string(address_name)[:30],
+            "address_1": sanitise_string(self.street)[:30],
+            "address_2": sanitise_string(self.suburb)[:30],
+            "address_3": sanitise_string(self.state)[:30],
+            "address_4": sanitise_string(attention_note)[:30],
+            "phone": sanitise_string(self.contact_phone)[:15],
+            "postcode": sanitise_string(self.postcode),
         }
 
 
 def formatted_price(price):
     if price:
         return round(price * Decimal(1.1), 4)
+
+
+def sanitise_string(value):
+    if value:
+        # Replace smart quotes with dumb quotes.
+        value = value.replace("‘", "'").replace("’", "'")
+        value = value.replace("“", "\"").replace("“", "\"")
+    return value
