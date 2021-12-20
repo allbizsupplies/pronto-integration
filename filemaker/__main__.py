@@ -19,8 +19,9 @@ def on_submit(values):
     except SaleNotOpenException as ex:
         raise SubmitError(str(ex))
     client = ODBCClient(settings)
-    order = client.get_order(values["order_id"])
-    controller.enter_order_id(values["order_id"])
+    order_id = values["order_id"]
+    order = client.get_order(order_id)
+    controller.enter_order_id(f"FM-{order_id}")
     controller.enter_customer_reference(order["reference"])
     if values["fill_delivery_address"]:
         address = build_address(order)
