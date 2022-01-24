@@ -15,6 +15,9 @@ fields:
   job_name: Job Name
   phone_number: Ph/Mob
   account_code: Payment method
+  contact: Contact
+  email: email
+  delivery_address: Deliver
   items:
     - code: Varience Item code 1
       description: Varience details

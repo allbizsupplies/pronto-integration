@@ -14,3 +14,6 @@ build/
 
 # Settings
 /settings.*.yml
+
+# Temporary files
+/tmp
