@@ -10,11 +10,12 @@ from common.exceptions import OrderNotFoundException
 class ODBCClient:
 
     def __init__(self, settings):
+        self.connection = None
         self.dsn = settings["dsn"]
         self.user = settings["user"]
         self.password = settings["password"]
         self.table = settings["table"]
-        fields = settings['fields']
+        fields = settings["fields"]
         self.fields = fields
         # Collect the required columns.
         columns = []
@@ -24,15 +25,26 @@ class ODBCClient:
         columns.append(fields["phone_number"])
         columns.append(fields["account_code"])
         columns.append(fields["contact"])
+        columns.append(fields["created_at"])
+        columns.append(fields["due_date"])
+        columns.append(fields["job_type"])
+        columns.append(fields["status"])
+        columns.append(fields["location"])
         self.columns = ",".join([f'"{column}"' for column in columns])
 
     def get_connection(self):
-        conn = pyodbc.connect(
-            DSN=self.dsn,
-            UID=self.user,
-            PWD=self.password,
-            encoding="utf-8")
-        return conn
+        if not self.connection:
+            self.connection = pyodbc.connect(
+                DSN=self.dsn,
+                UID=self.user,
+                PWD=self.password,
+                encoding="utf-8")
+        return self.connection
+
+    def close_connection(self):
+        if self.connection:
+            self.connection.close()
+            self.connection = None
 
     def fetch_records(self, id=None, search_terms=None):
         conn = self.get_connection()
@@ -69,7 +81,7 @@ class ODBCClient:
                                      f" LIKE LOWER('%{search_term}%')"
                                      ")")
                 statement += (f"({job_name_condition} OR {contact_condition})")
-            print(statement)
+            statement += f'ORDER BY "{self.fields["created_at"]}" DESC'
             cursor.execute(statement)
             rows = cursor.fetchall()
             for row in rows:
@@ -77,6 +89,7 @@ class ODBCClient:
                 id = int(record[id_field])
                 if id not in records:
                     records[id] = record
+
         return records
 
     def find_orders(self, query):
@@ -92,30 +105,21 @@ class ODBCClient:
 
         orders = []
         for id, record in records.items():
-
-            # Get the job name.
-            job_name = record[self.fields['job_name']]
-
-            # Get the customer's reference number.
-            reference = record[self.fields['ref']]
-
-            # Get the first phone number.
-            phone_number = record[self.fields['phone_number']]
-            if phone_number:
-                phone_number = phone_number.split("/")[0].strip()
+            created_at = record[self.fields['created_at']]
+            due_date = record[self.fields['due_date']]
+            if due_date:
+                due_date = due_date.isoformat()
             order = {
-                'id': id,
-                'job_name': job_name,
-                'phone_number': phone_number,
-                'reference': reference,
-                'items': list()
+                "id": id,
+                "job_name": record[self.fields['job_name']],
+                "contact": record[self.fields['contact']],
+                "reference": record[self.fields['ref']],
+                "job_type": record[self.fields['job_type']],
+                "status": record[self.fields['status']],
+                "created_at": created_at.isoformat(timespec="seconds"),
+                "due_date": due_date,
+                "location": record[self.fields['location']],
             }
-
-            # Add the account code if it is valid.
-            account_code = record[self.fields['account_code']]
-            if is_valid_account_code(account_code):
-                order['account_code'] = account_code
-
             orders.append(order)
         return orders
 

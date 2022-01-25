@@ -18,6 +18,13 @@ fields:
   contact: Contact
   email: email
   delivery_address: Deliver
+  created_at: Date taken
+  due_date: Due Date
+  job_type: JOB QUOTE SHEET
+  job_part_number: PART
+  job_part_count: PART OF
+  status: JOB COMPLETED
+  location: JOB LOCATION
   items:
     - code: Varience Item code 1
       description: Varience details
