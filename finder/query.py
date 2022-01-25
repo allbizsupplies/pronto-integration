@@ -11,7 +11,6 @@ def main():
     query = " ".join(sys.argv[1:])
     settings = get_settings("filemaker")
     client = ODBCClient(settings)
-    # print(f"Query: {query}")
     orders = client.find_orders(query)
     print(json.dumps({
         "orders": orders
