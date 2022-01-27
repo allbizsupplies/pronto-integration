@@ -15,9 +15,11 @@ def main():
 
 
 def on_submit(values):
-    query = values["query"]
+    data = json.dumps({
+        "query": values["query"]
+    })
     completed_process = subprocess.run(
-        ["pythonw", "-m", "finder.query", query], capture_output=True)
+        ["pythonw", "-m", "finder.query", data], capture_output=True)
     output = completed_process.stdout.decode("utf-8").strip()
     data = json.loads(output)
     return data
