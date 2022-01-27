@@ -66,9 +66,10 @@ class Gui():
         }
     ]
 
-    def __init__(self, title, on_submit):
+    def __init__(self, title, on_submit_search, on_mark_order_collected):
         self.title = title
-        self.on_submit = on_submit
+        self.on_submit_search = on_submit_search
+        self.on_mark_order_collected = on_mark_order_collected
         self.is_pending = False
 
     def init_fields(self):
@@ -111,6 +112,14 @@ class Gui():
         self.submit_button.grid(column=2, row=0, sticky=(W))
         query_frame.grid(column=0, row=0, sticky=W)
 
+        def on_select_tree(event):
+            item_id = event.widget.focus()
+            if item_id:
+                item = event.widget.item(item_id)
+                values = item['values']
+                order_id = values[0]
+                self.handle_mark_order_collected(order_id)
+
         # Add table widget.
         table_frame = ttk.Frame(top_frame)
         self.tree = ttk.Treeview(
@@ -124,6 +133,8 @@ class Gui():
         scrollbar.grid(column=1, row=0, sticky=(N, S))
         self.tree.configure(yscrollcommand=scrollbar.set)
         self.tree["columns"] = [col["key"] for col in self.TABLE_COLUMNS]
+        self.tree.bind("<Double-Button-1>", on_select_tree)
+        self.tree.bind("<Return>", on_select_tree)
         for col in self.TABLE_COLUMNS:
             self.tree.column(
                 col["key"],
@@ -173,6 +184,25 @@ class Gui():
         self.build()
         self.root.mainloop()
 
+    def handle_mark_order_collected(self, order_id):
+        self.set_pending(True)
+        proceed = messagebox.askyesno(
+            title='Confirmation',
+            message='Mark order as collected?')
+        if proceed:
+            try:
+                pass
+                data = self.on_mark_order_collected(order_id)
+                orders = self.orders
+                for index, order in enumerate(orders):
+                    if order['id'] == order_id:
+                        orders[index] = data["order"]
+                self.set_orders(orders)
+            except Exception as ex:
+                messagebox.showerror("Error", str(ex))
+                self.terminate()
+        self.set_pending(False)
+
     def handle_submit(self, keypress_event=None):
         self.clear_errors()
         try:
@@ -181,7 +211,8 @@ class Gui():
             return
         self.set_pending(True)
         try:
-            data = self.on_submit(self.process_values())
+            values = self.process_values()
+            data = self.on_submit_search(values["query"])
             self.set_orders(data["orders"])
         except SubmitError as ex:
             messagebox.showerror("Error", str(ex))

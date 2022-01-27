@@ -38,13 +38,21 @@ class ODBCClient:
                 DSN=self.dsn,
                 UID=self.user,
                 PWD=self.password,
-                encoding="utf-8")
+                encoding="utf-8",
+                autocommit=True)
         return self.connection
 
     def close_connection(self):
         if self.connection:
             self.connection.close()
             self.connection = None
+
+    def fetch_record(self, id):
+        id = int(id)
+        records = self.fetch_records(id=id)
+        if id in records:
+            return records[id]
+        return None
 
     def fetch_records(self, id=None, search_terms=None):
         conn = self.get_connection()
@@ -92,6 +100,20 @@ class ODBCClient:
 
         return records
 
+    def update_record(self, id, values):
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        id_field = self.fields['id']
+        statement = f"UPDATE {self.table} SET"
+        for field_name, value in values.items():
+            if isinstance(value, str):
+                statement += f' "{self.fields[field_name]}" = \'{value}\''
+            elif isinstance(value, int):
+                statement += f' "{self.fields[field_name]}" = {value}'
+        statement += f' WHERE "{self.fields["id"]}" = ?'
+        cursor.execute(statement, id)
+        return self.fetch_record(id)
+
     def find_orders(self, query):
 
         # If the query is a number, find records where order ID matches the
@@ -103,25 +125,29 @@ class ODBCClient:
             search_terms = filter(lambda s: s != "", query.split(" "))
             records = self.fetch_records(search_terms=search_terms)
 
-        orders = []
-        for id, record in records.items():
-            created_at = record[self.fields['created_at']]
-            due_date = record[self.fields['due_date']]
-            if due_date:
-                due_date = due_date.isoformat()
-            order = {
-                "id": id,
-                "job_name": record[self.fields['job_name']],
-                "contact": record[self.fields['contact']],
-                "reference": record[self.fields['ref']],
-                "job_type": record[self.fields['job_type']],
-                "status": record[self.fields['status']],
-                "created_at": created_at.isoformat(timespec="seconds"),
-                "due_date": due_date,
-                "location": record[self.fields['location']],
-            }
-            orders.append(order)
-        return orders
+        return [self.order_from_record(id, record)
+                for id, record in records.items()]
+
+    def update_order(self, order_id, values):
+        record = self.update_record(order_id, values)
+        return self.order_from_record(order_id, record)
+
+    def order_from_record(self, id, record):
+        created_at = record[self.fields['created_at']]
+        due_date = record[self.fields['due_date']]
+        if due_date:
+            due_date = due_date.isoformat()
+        return {
+            "id": id,
+            "job_name": record[self.fields['job_name']],
+            "contact": record[self.fields['contact']],
+            "reference": record[self.fields['ref']],
+            "job_type": record[self.fields['job_type']],
+            "status": record[self.fields['status']],
+            "created_at": created_at.isoformat(timespec="seconds"),
+            "due_date": due_date,
+            "location": record[self.fields['location']],
+        }
 
 
 def is_valid_account_code(account_code):
