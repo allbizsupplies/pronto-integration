@@ -34,7 +34,7 @@ class FetchTests(TestCase):
                 output = mock_stdout.getvalue()
                 result = json.loads(output)
                 self.assertDictEqual(result, {
-                    "orders": [order]
+                    "orders": [order],
                 })
 
     @patch("finder.fetch.get_settings")
@@ -60,7 +60,7 @@ class FetchTests(TestCase):
                 output = mock_stdout.getvalue()
                 result = json.loads(output)
                 self.assertDictEqual(result, {
-                    "orders": orders
+                    "orders": orders,
                 })
 
     @patch("finder.fetch.get_settings")
@@ -82,5 +82,5 @@ class FetchTests(TestCase):
                 output = mock_stdout.getvalue()
                 result = json.loads(output)
                 self.assertDictEqual(result, {
-                    "orders": []
+                    "orders": [],
                 })

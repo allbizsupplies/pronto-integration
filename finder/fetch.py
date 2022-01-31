@@ -13,7 +13,7 @@ def main():
     client = ODBCClient(settings)
     orders = client.find_orders(data["query"])
     print(json.dumps({
-        "orders": orders
+        "orders": orders,
     }))
 
 
