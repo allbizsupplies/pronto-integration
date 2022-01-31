@@ -84,15 +84,15 @@ def random_string(length):
 
 def fake_order(values={}):
     return {
-        "id": random_order_id(),
-        "job_name": random_string(20),
-        "contact": random_string(20),
-        "reference": random_string(6),
-        "job_type": "PRINT JOB",
-        "status": "COMPLETED",
-        "created_at": random_datetime().isoformat(timespec="seconds"),
-        "due_date": random_date().isoformat(),
-        "location": "COLLECTED",
+        "id": values.get("id", random_order_id()),
+        "job_name": values.get("job_name", random_string(20)),
+        "contact": values.get("contact", random_string(20)),
+        "reference": values.get("reference", random_string(6)),
+        "job_type": values.get("job_type", "PRINT JOB"),
+        "status": values.get("status", "COMPLETED"),
+        "created_at": values.get("created_at", random_datetime().isoformat(timespec="seconds")),
+        "due_date": values.get("due_date", random_date().isoformat()),
+        "location": values.get("location", "COLLECTED"),
     }
 
 
