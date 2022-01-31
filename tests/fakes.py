@@ -1,9 +1,22 @@
 
 from decimal import Decimal
-from datetime import datetime
+from datetime import date, datetime
 from random import randint, choice as random_choice
 import string
 import time
+
+
+def random_date(start=None, end=None):
+    """
+    Makes a random date between two given dates.
+    """
+    if start is None:
+        start = date.fromtimestamp(100000)
+    if end is None:
+        end = date.today()
+    return date.fromtimestamp(randint(
+        int(time.mktime(start.timetuple())),
+        int(time.mktime(end.timetuple()))))
 
 
 def random_datetime(start=None, end=None):
@@ -17,6 +30,13 @@ def random_datetime(start=None, end=None):
     return datetime.fromtimestamp(randint(
         int(time.mktime(start.timetuple())),
         int(time.mktime(end.timetuple()))))
+
+
+def random_order_id():
+    """
+    Makes a random order ID
+    """
+    return str(randint(100000, 999999))
 
 
 def random_item_code():
@@ -60,6 +80,20 @@ def random_string(length):
     """
     return "".join([
         random_choice(string.ascii_uppercase) for x in range(length)])
+
+
+def fake_order(values={}):
+    return {
+        "id": random_order_id(),
+        "job_name": random_string(20),
+        "contact": random_string(20),
+        "reference": random_string(6),
+        "job_type": "PRINT JOB",
+        "status": "COMPLETED",
+        "created_at": random_datetime().isoformat(timespec="seconds"),
+        "due_date": random_date().isoformat(),
+        "location": "COLLECTED",
+    }
 
 
 def fake_settings(settings={}):
