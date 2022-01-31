@@ -13,7 +13,7 @@ def main():
     client = ODBCClient(settings)
     order = client.update_order(data["id"], data["values"])
     print(json.dumps({
-        "order": order
+        "order": order,
     }))
 
 
