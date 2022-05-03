@@ -36,10 +36,14 @@ class ODBCClient:
             columns.append(payment_fields["amount"])
             columns.append(payment_fields["invoice"])
         self.columns = ",".join(['"{}"'.format(column) for column in columns])
-        # Get the list of item codes.
-        item_code_filepath = os.path.join(os.path.dirname(
-            os.path.realpath(__file__)), "item_codes.txt")
-        self.item_codes = [line.rstrip() for line in open(item_code_filepath)]
+        # Get the list of item code replacements.
+        repl_item_codes_filepath = os.path.join(os.path.dirname(
+            os.path.realpath(__file__)), "item_code_replacements.txt")
+        self.repl_item_codes = {}
+        with open(repl_item_codes_filepath) as file:
+            for line in file.readlines():
+                item_code, repl_item_code = line.rstrip().split(",")
+                self.repl_item_codes[item_code] = repl_item_code
 
     def get_connection(self):
         conn = pyodbc.connect(
@@ -104,9 +108,9 @@ class ODBCClient:
                 if quantity is None:
                     error = "Order {} has a line ({}) with no quantity.".format(
                         str(oid), item_code)
-                # Prepend "ALL-" to code if in list.
-                if item_code in self.item_codes:
-                    item_code = "ALL-" + item_code
+                # Replace code if replacement code exists.
+                if item_code in self.repl_item_codes:
+                    item_code = self.repl_item_codes[item_code]
                 # Add the item to the order.
                 order['items'].append({
                     'item_code': item_code,
