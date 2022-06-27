@@ -9,6 +9,10 @@ build/
 # Compiled AHK binaries
 *.exe
 
+# PyInstaller build files
+*.spec
+dist/
+
 # WIndows Shortcuts
 *.lnk
 
