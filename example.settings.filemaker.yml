@@ -1,8 +1,3 @@
-# The host and port where the server can be found.
-host: HOST
-port: 3301
-
-# Settings for ODBC client.
 dsn: FILEMAKER_ODBC_DSN
 user: FILEMAKER_USER
 password: FILEMAKER_PASSWORD
